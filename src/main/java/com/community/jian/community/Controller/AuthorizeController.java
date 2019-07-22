@@ -60,6 +60,7 @@ public class AuthorizeController {
                 String str = UUID.randomUUID().toString();
                 pojo.setToken(str);
                 pojo.setName(user1.getName());
+                pojo.setIconUrl(user1.getAvatar_url());
                 System.out.println(userService.updateUser(pojo));
 
                 response.addCookie(new Cookie("token", str));
@@ -72,6 +73,7 @@ public class AuthorizeController {
                 pojo.setName(user1.getName());
                 String str = UUID.randomUUID().toString();
                 pojo.setToken(str);
+                pojo.setIconUrl(user1.getAvatar_url());
                 response.addCookie(new Cookie("token", str));
                 userService.insertUser(pojo);
                 System.out.println(pojo.toString());

@@ -1,7 +1,7 @@
 .main{
-    margin-top: 30px;
-    margin-left: 30px;
-    margin-right: 30px;
+    margin-top: 40px;
+    margin-left: 40px;
+    margin-right: 40px;
     background-color: white;
 }
 body{
@@ -11,9 +11,12 @@ body{
     margin-bottom: 40px;
     float: right;
 }
+ .form-group .remind{
+     color: red;
+     margin-left: 10px;
+ }
+.row .left-model{
+    border-right: #efefef dashed 2px;
 
-.remind{
-    margin-left: 10px;
-    color: red;
 }
 

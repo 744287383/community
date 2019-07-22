@@ -10,7 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -28,25 +27,27 @@ public class PublishController {
 
 
     @GetMapping("/publish")
-    public String publish(Model model,Question question){
-        model.addAttribute("redirectUrl",redirectUrl);
-        model.addAttribute("client_id",client_id);
+    public String publish(Model model, Question question) {
+        model.addAttribute("redirectUrl", redirectUrl);
+        model.addAttribute("client_id", client_id);
         return "publish";
     }
 
     @PostMapping("/publish")
     public String doPublish(Model model,
                             @Valid Question question,
-                             BindingResult bindingResult,
-                            HttpServletRequest request){
+                            BindingResult bindingResult,
+                            HttpServletRequest request) {
 
-        model.addAttribute("redirectUrl",redirectUrl);
-        model.addAttribute("client_id",client_id);
-        if (bindingResult.hasErrors()){
-            System.out.println(bindingResult.getFieldErrors().toString());
+        model.addAttribute("redirectUrl", redirectUrl);
+        model.addAttribute("client_id", client_id);
+
+        //校验出错时返回原来的页面
+        if (bindingResult.hasErrors()) {
             return "publish";
         }
-        question.setCreator(((User)request.getSession().getAttribute("user")).getId());
+
+        question.setCreator(((User) request.getSession().getAttribute("user")).getId());
         question.setGmtCreate(System.currentTimeMillis());
         question.setGmtModified(question.getGmtCreate());
         System.out.println(question.toString());
