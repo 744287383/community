@@ -15,5 +15,7 @@ public interface UserMapping {
     int updateUser(User user);
     @Select("select * from user where token=#{token}")
     User findUserByToken(@Param("token") String token);
+    @Select("select * from user where id=#{id}")
+    User findUserById(@Param("id") String id);
 
 }

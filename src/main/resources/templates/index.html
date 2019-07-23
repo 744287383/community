@@ -56,5 +56,32 @@
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
+
+<div class="container-fluid main">
+    <div class="row">
+        <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12 left-model">
+            <h2> <span class="glyphicon glyphicon-list question-find" aria-hidden="true"></span>发现</h2>
+            <hr/>
+            <div class="media" th:each="question:${questionDTOs}">
+                <div class="media-left media-middle">
+                    <a href="#">
+                        <img class="media-object img-thumbnail img-rounded avatar_url" th:src="${question.user.iconUrl}" alt="...">
+                    </a>
+                </div>
+                <div class="media-body">
+                    <a href="#">  <h4 class="media-heading" th:text="${question.title}"></h4></a>
+                    <span class="text-desc"> <span th:text="${question.commentCount}"></span>个回复 • <span th:text="${question.viewCount}"></span> 次浏览 • <span th:text="${#dates.format(question.gmtCreate,'yyyy-MM-dd HH:mm')}"></span></span>
+                </div>
+            </div>
+
+
+
+        </div>
+
+
+        <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+            <h3>热门话题</h3></div>
+    </div>
+</div>
 </body>
 </html>

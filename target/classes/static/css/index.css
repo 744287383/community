@@ -1,7 +1,27 @@
-.dropdown .avatar_url{
-    width: 40px;
-    display:inline-block;
-    border: #efefef solid 2px;
-    margin: 0px;
-    padding: 0px;
+.left-model .media .avatar_url{
+    width: 50px;
+    height: 50px;
+
+}
+
+body .main{
+    margin-top: 40px;
+    margin-left: 40px;
+    margin-right: 40px;
+    background-color: white;
+}
+body{
+    background-color: #efefef;
+}
+.row .left-model{
+    border-right: #efefef dashed 2px;
+
+}
+.row .left-model .question-find{
+    margin-right: 8px;
+}
+.text-desc{
+    font-size: 12px;
+    font-weight: normal;
+    color: #999;
 }

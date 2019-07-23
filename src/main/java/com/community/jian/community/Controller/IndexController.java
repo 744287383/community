@@ -1,7 +1,9 @@
 package com.community.jian.community.Controller;
 
 
+import com.community.jian.community.dto.QuestionDTO;
 import com.community.jian.community.model.User;
+import com.community.jian.community.service.QuestionService;
 import com.community.jian.community.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,11 +14,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 @Controller
 public class IndexController {
     @Autowired
     private UserService userService;
+    @Autowired
+    private QuestionService questionService;
     @Value("${github.loginSuccess.redirect.url}")
     private String redirectUrl;
     @Value("${github.client.client_id}")
@@ -26,6 +31,9 @@ public class IndexController {
                         HttpServletRequest request){
         model.addAttribute("redirectUrl",redirectUrl);
         model.addAttribute("client_id",client_id);
+        List<QuestionDTO> questionDTOs = questionService.list();
+        model.addAttribute("questionDTOs",questionDTOs);
+        System.out.println(questionDTOs.toString());
         return "index";
     }
 
