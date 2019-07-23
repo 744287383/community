@@ -1,5 +1,6 @@
 package com.community.jian.community.service;
 
+import com.community.jian.community.dto.PaginationDTO;
 import com.community.jian.community.dto.QuestionDTO;
 import com.community.jian.community.mapper.QuestionMapping;
 import com.community.jian.community.mapper.UserMapping;
@@ -27,8 +28,11 @@ public class QuestionServiceIMP implements QuestionService{
     }
 
     @Override
-    public List<QuestionDTO> list() {
-        List<Question> questions=questionMapping.list();
+    public PaginationDTO list(Integer page, Integer size) {
+        PaginationDTO paginationDTO=new PaginationDTO();
+        Integer count=questionMapping.countQuestion();
+        paginationDTO.initPage(count,page,size);
+        List<Question> questions=questionMapping.list(paginationDTO.getPage(),size);
         List<QuestionDTO> questionDTOs=new ArrayList<>();
         if (null!=questions&&0<questions.size())
         for (Question question: questions){
@@ -38,6 +42,10 @@ public class QuestionServiceIMP implements QuestionService{
             questionDTO.setUser(user);
             questionDTOs.add(questionDTO);
         }
-        return questionDTOs;
+
+        paginationDTO.setQuestionDTOs(questionDTOs);
+
+
+        return paginationDTO;
     }
 }

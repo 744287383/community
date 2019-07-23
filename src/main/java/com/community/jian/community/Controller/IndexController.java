@@ -1,7 +1,7 @@
 package com.community.jian.community.Controller;
 
 
-import com.community.jian.community.dto.QuestionDTO;
+import com.community.jian.community.dto.PaginationDTO;
 import com.community.jian.community.model.User;
 import com.community.jian.community.service.QuestionService;
 import com.community.jian.community.service.UserService;
@@ -10,11 +10,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.List;
 
 @Controller
 public class IndexController {
@@ -28,12 +28,14 @@ public class IndexController {
     private String client_id;
     @RequestMapping("/")
     public String index(Model model,
-                        HttpServletRequest request){
+                        HttpServletRequest request,
+                        @RequestParam(name = "page",defaultValue = "1") Integer page,
+                        @RequestParam(name = "size",defaultValue = "7") Integer size){
         model.addAttribute("redirectUrl",redirectUrl);
         model.addAttribute("client_id",client_id);
-        List<QuestionDTO> questionDTOs = questionService.list();
-        model.addAttribute("questionDTOs",questionDTOs);
-        System.out.println(questionDTOs.toString());
+        PaginationDTO paginationDTO = questionService.list(page, size);
+        model.addAttribute("paginationDTO",paginationDTO);
+
         return "index";
     }
 
