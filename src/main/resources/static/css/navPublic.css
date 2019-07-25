@@ -1,0 +1,13 @@
+body .main{
+    margin-top: 40px;
+    margin-left: 40px;
+    margin-right: 40px;
+    background-color: white;
+}
+body{
+    background-color: #efefef;
+}
+.row .left-model{
+    border-right: #efefef dashed 2px;
+
+}

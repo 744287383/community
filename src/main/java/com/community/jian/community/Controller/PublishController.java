@@ -4,7 +4,6 @@ import com.community.jian.community.model.Question;
 import com.community.jian.community.model.User;
 import com.community.jian.community.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,16 +19,12 @@ public class PublishController {
     @Autowired
     private QuestionService questionService;
 
-    @Value("${github.loginSuccess.redirect.url}")
-    private String redirectUrl;
-    @Value("${github.client.client_id}")
-    private String client_id;
+
 
 
     @GetMapping("/publish")
     public String publish(Model model, Question question) {
-        model.addAttribute("redirectUrl", redirectUrl);
-        model.addAttribute("client_id", client_id);
+
         return "publish";
     }
 
@@ -39,8 +34,6 @@ public class PublishController {
                             BindingResult bindingResult,
                             HttpServletRequest request) {
 
-        model.addAttribute("redirectUrl", redirectUrl);
-        model.addAttribute("client_id", client_id);
 
         //校验出错时返回原来的页面
         if (bindingResult.hasErrors()) {

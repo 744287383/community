@@ -44,7 +44,7 @@ public class PaginationDTO {
             }
         }
 
-        if(this.page==1){
+        if(this.page==1 || this.page==0){
             this.showPrevious=false;
         }else {
             this.showPrevious=true;

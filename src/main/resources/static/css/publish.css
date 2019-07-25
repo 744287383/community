@@ -1,12 +1,4 @@
-.main{
-    margin-top: 40px;
-    margin-left: 40px;
-    margin-right: 40px;
-    background-color: white;
-}
-body{
-    background-color: #efefef;
-}
+
 .form-btn{
     margin-bottom: 40px;
     float: right;
@@ -15,8 +7,5 @@ body{
      color: red;
      margin-left: 10px;
  }
-.row .left-model{
-    border-right: #efefef dashed 2px;
 
-}
 

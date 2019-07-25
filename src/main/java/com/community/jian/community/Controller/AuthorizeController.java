@@ -80,10 +80,10 @@ public class AuthorizeController {
                 request.getSession().setAttribute("user", pojo);
             }
 
-            return "redirect:";
+            return "redirect:/";
         } else {
             response.addCookie(new Cookie("token", null));
-            return "redirect:";
+            return "redirect:/";
         }
 
 
