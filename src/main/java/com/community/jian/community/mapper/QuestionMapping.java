@@ -18,4 +18,11 @@ public interface QuestionMapping {
     List<Question> list(@Param("page") Integer page,@Param("size") Integer size);
     @Select("select count(id) from question")
     int countQuestion();
+
+    @Select("select * from question where creator=#{id} order by id desc limit #{size}*(#{page}-1),#{size}")
+    List<Question> listById(@Param("page") Integer page,@Param("size") Integer size,@Param("id") Integer id);
+    @Select("select count(id) from question where creator=#{id}")
+    int countQuestionById(@Param("id") Integer id);
+    @Select("select * from question where id =#{id}")
+    Question getQuestionById(@Param("id")Integer id);
 }

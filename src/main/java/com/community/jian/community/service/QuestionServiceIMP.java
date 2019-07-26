@@ -6,6 +6,7 @@ import com.community.jian.community.mapper.QuestionMapping;
 import com.community.jian.community.mapper.UserMapping;
 import com.community.jian.community.model.Question;
 import com.community.jian.community.model.User;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,19 +34,49 @@ public class QuestionServiceIMP implements QuestionService{
         Integer count=questionMapping.countQuestion();
         paginationDTO.initPage(count,page,size);
         List<Question> questions=questionMapping.list(paginationDTO.getPage(),size);
-        List<QuestionDTO> questionDTOs=new ArrayList<>();
-        if (null!=questions&&0<questions.size())
-        for (Question question: questions){
-            User user = userMapping.findUserById(String.valueOf(question.getCreator()));
-            QuestionDTO questionDTO=new QuestionDTO();
-            BeanUtils.copyProperties(question,questionDTO);
-            questionDTO.setUser(user);
-            questionDTOs.add(questionDTO);
-        }
+        List<QuestionDTO> questionDTOs = getQuestionDTOS(questions);
 
         paginationDTO.setQuestionDTOs(questionDTOs);
 
 
         return paginationDTO;
     }
+
+    @Override
+    public PaginationDTO listById(Integer page, Integer size, Integer id) {
+        PaginationDTO paginationDTO=new PaginationDTO();
+        Integer count=questionMapping.countQuestionById(id);
+        paginationDTO.initPage(count,page,size);
+        List<Question> questions=questionMapping.listById(paginationDTO.getPage(),size,id);
+        List<QuestionDTO> questionDTOs = getQuestionDTOS(questions);
+
+        paginationDTO.setQuestionDTOs(questionDTOs);
+
+
+        return paginationDTO;
+    }
+
+    public QuestionDTO getQuestionDTOById(Integer id){
+        QuestionDTO questionDTO=new QuestionDTO();
+        Question question=questionMapping.getQuestionById(id);
+        BeanUtils.copyProperties(question,questionDTO);
+        User user=userMapping.findUserById(String.valueOf(questionDTO.getCreator()));
+        questionDTO.setUser(user);
+        return questionDTO;
+    }
+
+    @NotNull
+    private List<QuestionDTO> getQuestionDTOS(List<Question> questions) {
+        List<QuestionDTO> questionDTOs = new ArrayList<>();
+        if (null != questions && 0 < questions.size())
+            for (Question question : questions) {
+                User user = userMapping.findUserById(String.valueOf(question.getCreator()));
+                QuestionDTO questionDTO = new QuestionDTO();
+                BeanUtils.copyProperties(question, questionDTO);
+                questionDTO.setUser(user);
+                questionDTOs.add(questionDTO);
+            }
+        return questionDTOs;
+    }
+
 }

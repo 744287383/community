@@ -56,11 +56,13 @@ public class LoginInterceptor implements HandlerInterceptor {
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-        Pioneer pioneer=new Pioneer();
-        pioneer.setClient_id(client_id);
-        pioneer.setRedirectUrl(redirectUrl);
-        modelAndView.getModel().put("pioneer",pioneer);
-
+        if(null!=modelAndView) {
+            Pioneer pioneer = new Pioneer();
+            pioneer.setClient_id(client_id);
+            pioneer.setRedirectUrl(redirectUrl);
+            Map<String, Object> model = modelAndView.getModel();
+            model.put("pioneer", pioneer);
+        }
 
     }
 

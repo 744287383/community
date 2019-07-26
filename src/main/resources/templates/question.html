@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>码农社区</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/css/navPublic.css">
+    <script src="/js/jquery.js"></script>
+    <script type="application/javascript" src="/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/css/index.css">
+    <script src="/js/community.js"></script>
+
+</head>
+<body>
+<div th:replace="nav::nav"></div>
+<div class="container-fluid main">
+    <div class="row line-right" >
+     <div class=" col-lg-9 col-md-9 col-sm-12 col-xs-12 left">
+         <h2 th:text="${questionDTO.title}"></h2>
+         <span class="text-desc"> 作者：<span th:text="${questionDTO.user.name}"></span> | <span th:text="${questionDTO.viewCount}"></span> 次浏览 | 发布时间：<span th:text="${#dates.format(questionDTO.gmtCreate,'yyyy-MM-dd HH:mm')}"></span></span>
+         <hr>
+         <span th:text="${questionDTO.description}"></span>
+         <hr>
+     </div>
+        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 right">
+            <h3>发起人</h3>
+            <hr>
+            <div class="media">
+                <div class="media-left media-middle">
+                    <a href="#">
+                        <img class="media-object img-thumbnail img-rounded avatar_url" th:src="${questionDTO.user.iconUrl}" alt="...">
+                    </a>
+                </div>
+                <div class="media-body">
+                    <a href="#">  <h4 class="media-heading" th:text="${questionDTO.user.name}"></h4></a>
+                    <span class="text-desc"> <span th:text="${questionDTO.user.bio}"></span></span>
+                </div>
+            </div>
+            <hr>
+            <br>
+            <h3>相关问题</h3>
+            <hr>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
