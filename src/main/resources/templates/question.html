@@ -16,13 +16,21 @@
 <div th:replace="nav::nav"></div>
 <div class="container-fluid main">
     <div class="row line-right" >
+
+
+
      <div class=" col-lg-9 col-md-9 col-sm-12 col-xs-12 left">
          <h2 th:text="${questionDTO.title}"></h2>
          <span class="text-desc"> 作者：<span th:text="${questionDTO.user.name}"></span> | <span th:text="${questionDTO.viewCount}"></span> 次浏览 | 发布时间：<span th:text="${#dates.format(questionDTO.gmtCreate,'yyyy-MM-dd HH:mm')}"></span></span>
          <hr>
          <span th:text="${questionDTO.description}"></span>
          <hr>
+         <a class="community-edit" th:if="${null!=session.user&&session.user.id==questionDTO.user.id}" th:href="'/editQuestion/'+${questionDTO.id}"><span class="glyphicon glyphicon-pencil" aria-hidden="true">编辑</span></a>
      </div>
+
+
+
+
         <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 right">
             <h3>发起人</h3>
             <hr>

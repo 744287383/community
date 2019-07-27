@@ -8,5 +8,5 @@ public interface UserService {
     User findUserByAccountID(String accountID);
     int updateUser(User user);
     User findUserByToken( String token);
-
+    User login(User user);
 }

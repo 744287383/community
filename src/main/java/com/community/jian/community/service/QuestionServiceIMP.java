@@ -65,6 +65,23 @@ public class QuestionServiceIMP implements QuestionService{
         return questionDTO;
     }
 
+    @Override
+    public void createOrUpdateQuestion(Question question,User user) {
+        if (question.getId()==0){
+            question.setGmtCreate(System.currentTimeMillis());
+            question.setGmtModified(question.getGmtCreate());
+            question.setCreator(user.getId());
+            questionMapping.insertQuestion(question);
+            return;
+        }
+        if (question.getId()>0){
+            if (question.getCreator()!=user.getId()){
+                return;
+            }
+            questionMapping.updateQuestion(question);
+        }
+    }
+
     @NotNull
     private List<QuestionDTO> getQuestionDTOS(List<Question> questions) {
         List<QuestionDTO> questionDTOs = new ArrayList<>();

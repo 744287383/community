@@ -22,7 +22,7 @@
     <div class="row line-right">
         <!--left-->
         <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 left">
-            <h2><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>发起</h2>
+            <h2><span class="glyphicon glyphicon-plus" aria-hidden="true"></span><span th:text="${actionName}"></span></h2>
             <hr/>
             <form action="/publish" method="post">
                 <div class="form-group">
@@ -40,7 +40,9 @@
                     <span class="remind" th:errors="${question.tags}"></span>
                     <input type="text" class="form-control" id="tags" name="tags" placeholder="输入标签以','号隔开" th:value="${question.tags}">
                 </div>
-                <button type="submit" class="btn btn-success form-btn">发布</button>
+                <input th:hidden="true"  name="id"  th:value="${question.id}">
+                <input  th:hidden="true" name="creator"  th:value="${question.creator}">
+                <button type="submit" class="btn btn-success form-btn" th:text="${actionName}"></button>
             </form>
 
         </div>
