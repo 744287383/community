@@ -50,7 +50,6 @@ public class PublishController {
         if (bindingResult.hasErrors()) {
             return "publish";
         }
-        System.out.println(question.toString());
         User user = (User) request.getSession().getAttribute("user");
         if (null!=user) {
             questionService.createOrUpdateQuestion(question, user);

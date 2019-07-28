@@ -25,7 +25,7 @@ public class ProfileController {
             model.addAttribute("section", section);
             model.addAttribute("sectionName", "我的提问");
             User user = (User) session.getAttribute("user");
-            paginationDTO = questionService.listById(page,size, (int) user.getId());
+            paginationDTO = questionService.listById(page,size, Math.toIntExact(user.getId()));
             model.addAttribute("paginationDTO",paginationDTO);
         }
         if ("replies".equals(section)){

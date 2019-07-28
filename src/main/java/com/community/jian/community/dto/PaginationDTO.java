@@ -15,8 +15,9 @@ public class PaginationDTO {
     private Integer page;
     private Integer endPage;
     private List<Integer> pages;
+    private Integer size;
     public void initPage(Integer totalQuestion,Integer page,Integer size){
-
+        this.size=size;
         pages=new ArrayList<>();
 
         endPage=0;
