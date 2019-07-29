@@ -16,4 +16,6 @@ public interface QuestionService {
 
 
     void createOrUpdateQuestion(Question question, User user);
+
+    void addViewCount(Integer id);
 }

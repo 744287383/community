@@ -1,7 +1,5 @@
 package com.community.jian.community.model;
 
-import javax.validation.constraints.NotBlank;
-
 public class Question {
     /**
      *
@@ -19,7 +17,7 @@ public class Question {
      *
      * @mbg.generated Sat Jul 27 22:15:18 CST 2019
      */
-    @NotBlank(message = "*标题不能为空")
+
     private String title;
 
     /**
@@ -74,7 +72,7 @@ public class Question {
      *
      * @mbg.generated Sat Jul 27 22:15:18 CST 2019
      */
-    @NotBlank(message = "*标签不能为空")
+
     private String tags;
 
     /**
@@ -93,7 +91,7 @@ public class Question {
      *
      * @mbg.generated Sat Jul 27 22:15:18 CST 2019
      */
-    @NotBlank(message = "*问题补充不能为空")
+
     private String description;
 
     /**

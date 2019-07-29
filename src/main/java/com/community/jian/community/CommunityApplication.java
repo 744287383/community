@@ -10,6 +10,7 @@ public class CommunityApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(CommunityApplication.class, args);
+
     }
-//    mvn -Dmybatis.generator.overwrite=true mybatis-generator:generate
+//    mvn -Dmybatis.generator.overwrite=false mybatis-generator:generate
 }

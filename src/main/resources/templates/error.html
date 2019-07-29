@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>码农社区</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+    <script src="/js/jquery.js"></script>
+    <script type="application/javascript" src="/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/css/navPublic.css">
+    <link rel="stylesheet" href="/css/index.css">
+    <script src="/js/community.js"></script>
+
+
+</head>
+<style>
+.error-message{
+    margin: 50px;
+}
+
+</style>
+<body>
+<div th:replace="nav::nav"></div>
+<div class="jumbotron error-message">
+    <h1>哎哟，出错了呀！</h1>
+    <p th:text="${message}"></p>
+    <p><a class="btn btn-primary btn-lg" href="/" role="button">回到首页</a></p>
+</div>
+</body>
+</html>

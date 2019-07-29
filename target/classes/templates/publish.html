@@ -27,21 +27,21 @@
             <form action="/publish" method="post">
                 <div class="form-group">
                     <label for="title">问题标题（简单扼要）:</label>
-                    <span class="remind" th:errors="${question.title}"></span>
-                    <input type="text" class="form-control" id="title" name="title" placeholder="问题标题" th:value="${question.title}"/>
+                    <span class="remind" th:errors="${questionDTO.title}"></span>
+                    <input type="text" class="form-control" id="title" name="title" placeholder="问题标题" th:value="${questionDTO.title}"/>
                 </div>
                 <div class="form-group">
                     <label for="description">问题补充（参考右栏指南）:</label>
-                    <span class="remind" th:errors="${question.description}"></span>
-                    <textarea  id="description" name="description"  class="form-control" rows="12" th:text="${question.description}"></textarea>
+                    <span class="remind" th:errors="${questionDTO.description}"></span>
+                    <textarea  id="description" name="description"  class="form-control" rows="12" th:text="${questionDTO.description}"></textarea>
                 </div>
                 <div class="form-group">
                     <label for="tags">添加标签:</label>
-                    <span class="remind" th:errors="${question.tags}"></span>
-                    <input type="text" class="form-control" id="tags" name="tags" placeholder="输入标签以','号隔开" th:value="${question.tags}">
+                    <span class="remind" th:errors="${questionDTO.tags}"></span>
+                    <input type="text" class="form-control" id="tags" name="tags" placeholder="输入标签以','号隔开" th:value="${questionDTO.tags}">
                 </div>
-                <input th:hidden="true"  name="id"  th:value="${question.id}">
-                <input  th:hidden="true" name="creator"  th:value="${question.creator}">
+                <input th:hidden="true"  name="id"  th:value="${questionDTO.id}">
+                <input  th:hidden="true" name="creator"  th:value="${questionDTO.creator}">
                 <button type="submit" class="btn btn-success form-btn" th:text="${actionName}"></button>
             </form>
 

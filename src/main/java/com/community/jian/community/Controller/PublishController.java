@@ -4,6 +4,7 @@ import com.community.jian.community.dto.QuestionDTO;
 import com.community.jian.community.model.Question;
 import com.community.jian.community.model.User;
 import com.community.jian.community.service.QuestionService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,7 +25,7 @@ public class PublishController {
     @GetMapping("/editQuestion/{id}")
     public String edit(@PathVariable("id") Integer id,Model model){
         QuestionDTO questionDTO = questionService.getQuestionDTOById(id);
-        model.addAttribute("question",questionDTO);
+        model.addAttribute("questionDTO",questionDTO);
         model.addAttribute("actionName","编辑");
         model.addAttribute("action","提交");
 
@@ -33,7 +34,7 @@ public class PublishController {
 
 
     @GetMapping("/publish")
-    public String publish(Model model, Question question) {
+    public String publish(Model model, QuestionDTO questionDTO) {
         model.addAttribute("actionName","发起");
         model.addAttribute("action","发布");
         return "publish";
@@ -41,15 +42,24 @@ public class PublishController {
 
     @PostMapping("/publish")
     public String doPublish(Model model,
-                            @Valid Question question,
+                            @Valid QuestionDTO questionDTO,
                             BindingResult bindingResult,
                             HttpServletRequest request) {
 
-
+        Question question=new Question();
         //校验出错时返回原来的页面
         if (bindingResult.hasErrors()) {
+            if (questionDTO.getId()!=null){
+                model.addAttribute("actionName","编辑");
+                model.addAttribute("action","提交");
+            }else {
+                model.addAttribute("actionName","发起");
+                model.addAttribute("action","发布");
+            }
             return "publish";
         }
+
+        BeanUtils.copyProperties(questionDTO,question);
         User user = (User) request.getSession().getAttribute("user");
         if (null!=user) {
             questionService.createOrUpdateQuestion(question, user);

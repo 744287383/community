@@ -2,6 +2,9 @@ package com.community.jian.community.service;
 
 import com.community.jian.community.dto.PaginationDTO;
 import com.community.jian.community.dto.QuestionDTO;
+import com.community.jian.community.exception.QuestionErrorMessage;
+import com.community.jian.community.exception.ServiceException;
+import com.community.jian.community.mapper.QuestionEXTMapper;
 import com.community.jian.community.mapper.QuestionMapper;
 import com.community.jian.community.mapper.UserMapper;
 import com.community.jian.community.model.Question;
@@ -21,7 +24,8 @@ import java.util.List;
 public class QuestionServiceIMP implements QuestionService{
     @Autowired
     private UserMapper userMapper;
-
+    @Autowired
+    private QuestionEXTMapper questionEXTMapper;
     @Autowired
     private QuestionMapper questionMapper;
     @Override
@@ -31,6 +35,7 @@ public class QuestionServiceIMP implements QuestionService{
     }
 
     @Override
+    //获取首页问题列表
     public PaginationDTO list(Integer page, Integer size) {
         PaginationDTO paginationDTO=new PaginationDTO();
         Integer count= (int)questionMapper.countByExample(new QuestionExample());
@@ -47,7 +52,7 @@ public class QuestionServiceIMP implements QuestionService{
         return paginationDTO;
     }
 
-    @Override
+    @Override//获取个人发布问题列表
     public PaginationDTO listById(Integer page, Integer size, Integer id) {
         PaginationDTO paginationDTO=new PaginationDTO();
         QuestionExample questionExample = new QuestionExample();
@@ -69,10 +74,13 @@ public class QuestionServiceIMP implements QuestionService{
 
         return paginationDTO;
     }
-
+    @Override//通过id获取问题详细
     public QuestionDTO getQuestionDTOById(Integer id){
         QuestionDTO questionDTO=new QuestionDTO();
         Question question=questionMapper.selectByPrimaryKey(id);
+        if (question==null){
+            throw new ServiceException(QuestionErrorMessage.QUESTION_NOT_FOUND);
+        }
         BeanUtils.copyProperties(question,questionDTO);
         User user=userMapper.selectByPrimaryKey(Long.valueOf(questionDTO.getCreator()));
         questionDTO.setUser(user);
@@ -88,17 +96,26 @@ public class QuestionServiceIMP implements QuestionService{
             questionMapper.insertSelective(question);
             return;
         }
-        if (question.getId()>0){
+        if (question.getId()!=null){
             if (question.getCreator()!=Math.toIntExact(user.getId())){
-                return;
+               throw new ServiceException(QuestionErrorMessage.QUESTION_NOT_MATCH);
             }
             question.setGmtModified(System.currentTimeMillis());
             question.setCreator(null);
-            questionMapper.updateByPrimaryKeySelective(question);
+
+            int i = questionMapper.updateByPrimaryKeySelective(question);
+            if(i!=1){
+                throw new ServiceException(QuestionErrorMessage.QUESTION_ERROR_UPDATE);
+            }
         }
     }
 
-    @NotNull
+    @Override
+    public void addViewCount(Integer id) {
+        questionEXTMapper.addViewCount(id);
+    }
+
+    @NotNull//把question的list转换成questionDTO的list
     private List<QuestionDTO> getQuestionDTOS(List<Question> questions) {
         List<QuestionDTO> questionDTOs = new ArrayList<>();
         if (null != questions && 0 < questions.size())
