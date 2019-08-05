@@ -1,5 +1,6 @@
 package com.community.jian.community.Controller;
 
+import com.community.jian.community.exception.ApplicationErrorMessage;
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -26,10 +27,10 @@ public class CutomizeController implements ErrorController {
 
         ModelAndView modelAndView = new ModelAndView("error");
         if (status.is4xxClientError()){
-            modelAndView.addObject("message","请求的地址有误，要不然换个试试！！！");
+            modelAndView.addObject("message", ApplicationErrorMessage.REQUEST_ERROR.getMessage());
         }
         if (status.is5xxServerError()){
-            modelAndView.addObject("message","服务器太热了，要不然稍后再试试！！！");
+            modelAndView.addObject("message",ApplicationErrorMessage.SERVICE_HOT.getMessage());
         }
 
         return modelAndView;

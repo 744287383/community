@@ -12,5 +12,5 @@ public class CommunityApplication {
         SpringApplication.run(CommunityApplication.class, args);
 
     }
-//    mvn -Dmybatis.generator.overwrite=false mybatis-generator:generate
+//    mvn -Dmybatis.generator.overwrite=true mybatis-generator:generate
 }

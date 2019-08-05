@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 public class QuestionController {
     @Autowired
    private QuestionService questionService;
+
     @GetMapping("/question/{id}")
     public String question(@PathVariable("id") Integer id,
                            Model model){
@@ -20,5 +21,9 @@ public class QuestionController {
         model.addAttribute("questionDTO",questionDTO);
     return "question";
     }
+
+
+
+
 
 }

@@ -62,6 +62,7 @@ public class QuestionServiceIMP implements QuestionService{
         paginationDTO.initPage(count,page,size);
         int offset=paginationDTO.getSize()*(paginationDTO.getPage()-1);
         questionExample=new QuestionExample();
+
         questionExample.setOrderByClause("id desc");
         questionExample.createCriteria()
                 .andCreatorEqualTo(id);
@@ -77,7 +78,7 @@ public class QuestionServiceIMP implements QuestionService{
     @Override//通过id获取问题详细
     public QuestionDTO getQuestionDTOById(Integer id){
         QuestionDTO questionDTO=new QuestionDTO();
-        Question question=questionMapper.selectByPrimaryKey(id);
+        Question question=questionMapper.selectByPrimaryKey(Long.valueOf(id));
         if (question==null){
             throw new ServiceException(QuestionErrorMessage.QUESTION_NOT_FOUND);
         }

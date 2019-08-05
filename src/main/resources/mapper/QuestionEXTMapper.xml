@@ -28,4 +28,7 @@
   <update id="addViewCount" parameterType="Integer">
     update QUESTION set VIEW_COUNT=VIEW_COUNT+1 where ID=#{id}
   </update>
+  <select id="selectbyID" parameterType="Integer" resultType="Question">
+    select * from QUESTION,USER where QUESTION.CREATOR=USER.id and QUESTION.ID=#{id}
+  </select>
 </mapper>
