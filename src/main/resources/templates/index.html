@@ -10,7 +10,16 @@
     <link rel="stylesheet" href="/css/navPublic.css">
     <link rel="stylesheet" href="/css/index.css">
     <script src="/js/community.js"></script>
+    <script type="application/javascript">
+        var item = localStorage.getItem("login");
+        if ("login"==item){
 
+
+            localStorage.removeItem("login");
+            window.opener.location.href=window.opener.location.href;
+            window.close();
+        }
+    </script>
 
 </head>
 <style>

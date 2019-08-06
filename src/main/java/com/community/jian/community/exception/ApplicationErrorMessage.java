@@ -1,7 +1,7 @@
 package com.community.jian.community.exception;
 
 public enum ApplicationErrorMessage implements ICutomizeMessage {
-    SERVICE_HOT(4001,"服务器太热了，要不然稍后再试试！！！"),
+    SERVICE_HOT(4001,"服务器冒烟了，要不然稍后再试试！！！"),
     REQUEST_ERROR(4002,"请求的地址有误，要不然换个试试！！！");
 
 

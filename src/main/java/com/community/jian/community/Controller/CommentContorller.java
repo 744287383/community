@@ -1,9 +1,13 @@
 package com.community.jian.community.Controller;
 
+import com.community.jian.community.dto.CommentDTO;
 import com.community.jian.community.dto.ResultDTO;
+import com.community.jian.community.exception.CommentErrorMessage;
+import com.community.jian.community.exception.CommentException;
 import com.community.jian.community.model.Comment;
 import com.community.jian.community.model.User;
 import com.community.jian.community.service.CommentService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,17 +23,23 @@ public class CommentContorller {
 
     @PostMapping("/comment")
     @ResponseBody
-    public ResultDTO insertComment(@RequestBody Comment comment,
+    public ResultDTO insertComment(@RequestBody CommentDTO commentDTO,
                                    HttpSession session){
         User user = (User) session.getAttribute("user");
-        System.out.println(comment.toString());
-        comment.setCommentor(6L);
-        comment.setGmtCreate(System.currentTimeMillis());
-        comment.setGmtModified(comment.getGmtCreate());
-        int i = commentService.insertComment(comment);
-        if (i==1){
-            System.out.println("插入超过");
+        if (null==user){
+            throw new CommentException(CommentErrorMessage.NOT_LOGIN);
         }
+        System.out.println(commentDTO.toString());
+
+
+        Comment comment=new Comment();
+        BeanUtils.copyProperties(commentDTO,comment);
+        comment.setGmtCreate(System.currentTimeMillis());
+        comment.setGmtModified(System.currentTimeMillis());
+        comment.setCommentor(user.getId());
+
+        commentService.addComment(comment);
+
         ResultDTO resultDTO = ResultDTO.successOf();
         resultDTO.setData(comment);
         return resultDTO;

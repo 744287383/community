@@ -34,4 +34,6 @@ public static ResultDTO errorOf(Integer code,String message){
         resultDTO.setMessage(e.getMessage());
         return resultDTO;
     }
+
+
 }

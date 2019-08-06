@@ -31,4 +31,7 @@
   <select id="selectbyID" parameterType="Integer" resultType="Question">
     select * from QUESTION,USER where QUESTION.CREATOR=USER.id and QUESTION.ID=#{id}
   </select>
+  <select id="addCommentCount" parameterType="Integer">
+   update QUESTION set COMMENT_COUNT=COMMENT_COUNT+1 where ID=#{id}
+  </select>
 </mapper>

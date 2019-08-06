@@ -4,4 +4,6 @@ import com.community.jian.community.model.Comment;
 
 public interface CommentService {
     int  insertComment(Comment comment);
+
+    void addComment(Comment comment);
 }
