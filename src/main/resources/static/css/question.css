@@ -5,3 +5,27 @@ float: right;
 .comment-content{
     margin: 15px auto;
 }
+
+.time-toRight{
+    float: right;
+}
+.icon-z{
+    font-size: 16px;
+    margin-right: 12px;
+    cursor: pointer
+}
+.icon-z:hover{
+    color: #499EF3;
+}
+
+.comment-content-reply{
+    font-size: 14px;
+}
+.comment-reply{
+    padding-bottom: 10px;
+
+}
+.comment-reply-underLine{
+    border-bottom: 1px solid #eee;
+
+}
