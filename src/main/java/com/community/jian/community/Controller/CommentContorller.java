@@ -7,6 +7,7 @@ import com.community.jian.community.exception.CommentException;
 import com.community.jian.community.model.Comment;
 import com.community.jian.community.model.User;
 import com.community.jian.community.service.CommentService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,7 +31,9 @@ public class CommentContorller {
             throw new CommentException(CommentErrorMessage.NOT_LOGIN);
         }
         System.out.println(commentDTO.toString());
-
+        if (commentDTO==null|| StringUtils.isBlank(commentDTO.getContent())){
+            throw new CommentException(CommentErrorMessage.COMMENT_CONTENT_NULL);
+        }
 
         Comment comment=new Comment();
         BeanUtils.copyProperties(commentDTO,comment);

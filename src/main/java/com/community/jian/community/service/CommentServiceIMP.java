@@ -43,23 +43,26 @@ public class CommentServiceIMP implements CommentService {
             throw new CommentException(CommentErrorMessage.NOT_FOUNT_QUESTION);
         }
 
-        Question question = questionMapper.selectByPrimaryKey(comment.getParentId());
-        if (null==question){
-            throw new CommentException(CommentErrorMessage.NOT_FOUNT_QUESTION);
-        }
-
         if (!CommentTypeEnum.isCommentType(comment.getType())){
         throw new CommentException(CommentErrorMessage.COMMENT_TYPE_ERROR);
         }
 
         if (CommentTypeEnum.Comment_TYPE_FATHER.getType()==comment.getType()){
             //一级评论
+            Question question = questionMapper.selectByPrimaryKey(comment.getParentId());
+            if (null==question){
+                throw new CommentException(CommentErrorMessage.NOT_FOUNT_QUESTION);
+            }
             int i = commentMapper.insertSelective(comment);
             if (1==i){
                 questionEXTMapper.addCommentCount(Math.toIntExact(comment.getParentId()));
             }
         }else {
             //二级评论
+            Comment comment1 = commentMapper.selectByPrimaryKey(comment.getParentId());
+            if (comment1==null){
+                throw  new CommentException(CommentErrorMessage.COMMENT_NOT_FOUND);
+            }
             commentMapper.insertSelective(comment);
         }
 
@@ -68,8 +71,10 @@ public class CommentServiceIMP implements CommentService {
     @Override
     public List<CommentDTO> getOneComment(Long questionId) {
         CommentExample commentExample = new CommentExample();
+
         commentExample.or().andParentIdEqualTo(questionId)
                 .andTypeEqualTo(CommentTypeEnum.Comment_TYPE_FATHER.getType());
+        commentExample.setOrderByClause("gmt_create desc");
         List<Comment> comments = commentMapper.selectByExample(commentExample);
         if (comments==null||comments.size()==0){
             return  new ArrayList<CommentDTO>();

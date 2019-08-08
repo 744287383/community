@@ -29,3 +29,18 @@ float: right;
     border-bottom: 1px solid #eee;
 
 }
+
+.two-reply-body{
+    border: 1px solid #eee;
+    border-radius: 7px;
+    margin-top: 10px;
+    padding-top: 20px;
+}
+
+.reply-btn{
+    margin-top: 15px;
+}
+
+.reply-icon{
+    color: #499EF3;
+}
