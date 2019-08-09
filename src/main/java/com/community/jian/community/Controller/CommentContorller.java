@@ -11,11 +11,10 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 public class CommentContorller {
@@ -43,8 +42,16 @@ public class CommentContorller {
 
         commentService.addComment(comment);
 
-        ResultDTO resultDTO = ResultDTO.successOf();
-        resultDTO.setData(comment);
-        return resultDTO;
+
+
+        return ResultDTO.successOf();
+    }
+
+    @GetMapping("/comment/{id}")
+    @ResponseBody
+    public ResultDTO getTwoComment(@PathVariable("id") Long id){
+       List<CommentDTO>  commentDTOS=commentService.getTwoCommentDTOS(id);
+        System.out.println(commentDTOS.toString());
+        return ResultDTO.successOf(commentDTOS);
     }
 }

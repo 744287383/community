@@ -47,7 +47,6 @@ function post(parentId,content,type) {
                     if (isLogin){
                         localStorage.setItem("login","login");
                         window.open('https://github.com/login/oauth/authorize?client_id='+client_id+'&redirect_uri='+redirectUrl+'&scope=user&state=1');
-
                     }
 
                 }else {
@@ -62,20 +61,59 @@ function post(parentId,content,type) {
 
 
 function showTwoComment(e) {
+    Handlebars.registerHelper('createDate', function (date, options) {
+        var date1 = new Date(date);
+
+        return date1.Format("yyyy-MM-dd");
+    });
     var id=e.getAttribute("data-id");
     console.log(id);
     var state=$("#comment-"+id).data("in");
     console.log(state);
+    var templateOBJ=  $("#reply-template").html();
+    var template= Handlebars.compile(templateOBJ);
+
     if (state){
         // 缩回二级评论
         e.classList.remove("reply-icon");
         $("#comment-"+id).removeClass("in");
         $("#comment-"+id).removeData("in");
+
     }else {
         //展开二级评论
+        var commentList = document.getElementById("comment-rr-"+id);
+        commentList.innerHTML="";
+        $.getJSON( "/comment/"+id, function(data) {
+            $.each( data.data, function(index,comment) {
+
+            var htmlContent=template(comment);
+
+            commentList.innerHTML=commentList.innerHTML+htmlContent;
+
+            });
+
+        });
         e.classList.add("reply-icon");
         $("#comment-"+id).data("in","in");
         $("#comment-"+id).addClass("in");
     }
 
+
+
+}
+
+Date.prototype.Format = function (fmt) { //author: meizz
+    var o = {
+        "M+": this.getMonth() + 1, //月份
+        "d+": this.getDate(), //日
+        "h+": this.getHours(), //小时
+        "m+": this.getMinutes(), //分
+        "s+": this.getSeconds(), //秒
+        "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+        "S": this.getMilliseconds() //毫秒
+    };
+    if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+    for (var k in o)
+        if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+    return fmt;
 }

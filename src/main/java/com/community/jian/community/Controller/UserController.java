@@ -2,14 +2,15 @@ package com.community.jian.community.Controller;
 
 import com.community.jian.community.model.User;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class UserController {
-    @PostMapping("/nini")
+    @GetMapping("/nini")
     public String  getUsers(User user){
         //收到的参数转为对象的属性
         System.out.println(user.toString());
-        return "nav";
+        return "test";
     }
+
 }

@@ -9,6 +9,7 @@ import com.community.jian.community.mapper.QuestionEXTMapper;
 import com.community.jian.community.mapper.QuestionMapper;
 import com.community.jian.community.mapper.UserMapper;
 import com.community.jian.community.model.*;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -70,10 +71,20 @@ public class CommentServiceIMP implements CommentService {
 
     @Override
     public List<CommentDTO> getOneComment(Long questionId) {
+        return getCommentDTOS(questionId,CommentTypeEnum.Comment_TYPE_FATHER);
+    }
+
+    @Override
+    public List<CommentDTO> getTwoCommentDTOS(Long id) {
+        return getCommentDTOS(id,CommentTypeEnum.Comment_TYPE_SON);
+    }
+
+    @NotNull
+    public List<CommentDTO> getCommentDTOS(Long questionId, CommentTypeEnum commentTypeEnum) {
         CommentExample commentExample = new CommentExample();
 
         commentExample.or().andParentIdEqualTo(questionId)
-                .andTypeEqualTo(CommentTypeEnum.Comment_TYPE_FATHER.getType());
+                .andTypeEqualTo(commentTypeEnum.getType());
         commentExample.setOrderByClause("gmt_create desc");
         List<Comment> comments = commentMapper.selectByExample(commentExample);
         if (comments==null||comments.size()==0){

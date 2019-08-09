@@ -11,4 +11,6 @@ public interface CommentService {
     void addComment(Comment comment);
 
     List<CommentDTO> getOneComment(Long questionId);
+
+    List<CommentDTO> getTwoCommentDTOS(Long id);
 }
