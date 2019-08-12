@@ -82,7 +82,7 @@
                             </span>
                             <div class="text-desc" style="width: 100%;">
                                 <span class="glyphicon glyphicon-thumbs-up icon-z" aria-hidden="true"></span>
-                                <span class="glyphicon glyphicon-comment icon-z" aria-hidden="true" th:data-id="${commentDTO.id}" onclick="showTwoComment(this)"></span>
+                               <span class="icon-z" th:data-id="${commentDTO.id}" onclick="showTwoComment(this)"> <span class="glyphicon glyphicon-comment " aria-hidden="true" ></span> <span th:text="${commentDTO.commentCount}"></span></span>
                                 <span class="time-toRight" th:text="${#dates.format(commentDTO.gmtCreate,'yyyy-MM-dd')}"></span>
                             </div>
                             <!--二级评论列表-->

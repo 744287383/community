@@ -29,7 +29,6 @@ public class CommentContorller {
         if (null==user){
             throw new CommentException(CommentErrorMessage.NOT_LOGIN);
         }
-        System.out.println(commentDTO.toString());
         if (commentDTO==null|| StringUtils.isBlank(commentDTO.getContent())){
             throw new CommentException(CommentErrorMessage.COMMENT_CONTENT_NULL);
         }

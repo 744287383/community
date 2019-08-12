@@ -1,0 +1,21 @@
+.input_box {
+	padding: 4px 8px; border-radius: 5px; border: 1px solid rgb(204, 204, 204); border-image: none; color: rgb(85, 85, 85);
+}
+.input_box .input_tags {
+	display: none;
+}
+.input_box .input_content {
+	outline: 0px; border: 0px currentColor; border-image: none; height: 25px; vertical-align: top; min-width: 10px;
+}
+.input_box a {
+	padding: 2px 4px; border-radius: 2px; border: 1px solid #31B0D5; border-image: none; color: white; text-decoration: none; margin-right: 5px; display: inline-block; cursor: pointer; background-color: #31B0D5;
+}
+.input_box span {
+	line-height: 13px; font-size: 13px;
+}
+.input_box em {
+	color: white; width: 13px; height: 13px; overflow: hidden; margin-left: 5px; display: inline-block; cursor: pointer;
+}
+.formcl {
+	width: 500px;
+}

@@ -1,0 +1,40 @@
+﻿<!DOCTYPE HTML>
+
+
+
+<HTML><HEAD>
+    <META content="IE=11.0000"
+                  http-equiv="X-UA-Compatible">
+ 
+<META charset="utf-8"> 
+<META http-equiv="X-UA-Compatible" content="IE=edge"> <TITLE>input自定义标签</TITLE>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/css/input_tags.css">
+    <script src="/js/jquery.js"></script>
+    <script type="application/javascript" src="/js/bootstrap.min.js"></script>
+    <script src="/js/input_tags.js"></script>
+<META name="GENERATOR" content="MSHTML 11.00.10570.1001">
+</HEAD>
+<BODY>
+<FORM class="formcl" action="">
+<H3>输入内容后，按回车键增加标签</H3>
+<DIV class="input_box" id="tags"><INPUT name="tags" class="input_tags" type="text" placeholder="请输入文字" value="测试,标签,Tags">
+</DIV></FORM>
+<SCRIPT>
+		//初始化并调用$.FreeTags()  传入参数为 id
+		/**
+			HTML：
+
+			<div class="input_box" id="tags">
+				<input type="text" class="input_tags" name="tags" value="测试,标签,Tags,Input,value" placeholder="请输入文字" />
+			</div>
+
+			JS:
+			$.FreeTags('tags');
+		*/
+		$(document).ready(function(e){
+			$.FreeTags('tags');
+		});
+	</SCRIPT>
+ </BODY></HTML>

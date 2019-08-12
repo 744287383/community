@@ -4,10 +4,7 @@ import com.community.jian.community.dto.CommentDTO;
 import com.community.jian.community.dto.CommentTypeEnum;
 import com.community.jian.community.exception.CommentErrorMessage;
 import com.community.jian.community.exception.CommentException;
-import com.community.jian.community.mapper.CommentMapper;
-import com.community.jian.community.mapper.QuestionEXTMapper;
-import com.community.jian.community.mapper.QuestionMapper;
-import com.community.jian.community.mapper.UserMapper;
+import com.community.jian.community.mapper.*;
 import com.community.jian.community.model.*;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.BeanUtils;
@@ -30,6 +27,8 @@ public class CommentServiceIMP implements CommentService {
     private QuestionEXTMapper questionEXTMapper;
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private CommentEXTMapper commentEXTMapper;
     @Override
     public int  insertComment(Comment comment) {
 
@@ -65,6 +64,8 @@ public class CommentServiceIMP implements CommentService {
                 throw  new CommentException(CommentErrorMessage.COMMENT_NOT_FOUND);
             }
             commentMapper.insertSelective(comment);
+            commentEXTMapper.addCommentCount(comment.getParentId());
+
         }
 
     }
@@ -90,6 +91,7 @@ public class CommentServiceIMP implements CommentService {
         if (comments==null||comments.size()==0){
             return  new ArrayList<CommentDTO>();
         }
+
         List<Long> userId = comments.stream().map(comment -> comment.getCommentor()).distinct().collect(Collectors.toList());
         UserExample userExample=new UserExample();
         userExample.or().andIdIn(userId);
