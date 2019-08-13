@@ -44,3 +44,14 @@ float: right;
 .reply-icon{
     color: #499EF3;
 }
+
+.tags-case{
+    margin-bottom: 10px;
+    background-color: #31B0D5;
+    padding: 3px 5px;
+    font-size: 12px;
+    color: white;
+    display: inline-block;
+    border-radius: 3px;
+    margin-right: 6px;
+}

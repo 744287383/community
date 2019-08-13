@@ -57,10 +57,14 @@
                     th:text="${#dates.format(questionDTO.gmtCreate,'yyyy-MM-dd HH:mm')}"></span></span>
             <hr>
             <span th:text="${questionDTO.description}"></span>
+                <hr>
+            <div >
+                <span  th:each="tag:${questionDTO.tags.split(',')}" class="tags-case"><span class="glyphicon glyphicon-tags" aria-hidden="true"></span> <span th:text="${tag}"></span></span>
+            </div>
             <hr>
             <a class="community-edit" th:if="${null!=session.user&&session.user.id==questionDTO.user.id}"
                th:href="'/editQuestion/'+${questionDTO.id}"><span class="glyphicon glyphicon-pencil" aria-hidden="true">编辑</span></a>
-            <hr>
+            <br>
             </div>
             <!--回复列表-->
             <div style="padding: 0px;">

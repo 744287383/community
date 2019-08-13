@@ -16,9 +16,16 @@
                         shwoalert(e, val);
                         return false;
                     }
-                    ta.before('<a href="javascript:;"><span><span class="glyphicon glyphicon-tags" aria-hidden="true"></span> ' + val + '</span><em>X</em></a>');
-                    ta.next('input').val(ta.next('input').val() + ',' + val)
-                    ta.val('');
+                    ta.before('<a href="javascript:;"><span><span class="glyphicon glyphicon-tags" aria-hidden="true" style="margin-right: 5px"></span>' + val + '</span><em>X</em></a>');
+                    if (ta.next('input').val().length==0){
+                        ta.next('input').val( val);
+                        ta.val('');
+                        return false;
+                    }else {
+                        ta.next('input').val(ta.next('input').val() + ',' + val);
+                        ta.val('');
+                        return false;
+                    }
                 }
             }
         });
@@ -39,6 +46,29 @@
         });
     };
 
+    $.tapAddTags=function (e,val) {
+        var oa = '#' + e + ' input:first';
+        var ta = $(oa);
+
+        var tags = ta.next('input').val();
+        var tag = tags.split(',');
+        if ($.inArray(val, tag) >= 0) {
+            shwoalert(e, val);
+            return false;
+        }
+        ta.before('<a href="javascript:;"><span><span class="glyphicon glyphicon-tags" aria-hidden="true" style="margin-right: 5px;"></span>' + val + '</span><em>X</em></a>');
+        if (ta.next('input').val().length==0){
+            ta.next('input').val( val);
+            ta.val('');
+            return false;
+        }else {
+            ta.next('input').val(ta.next('input').val() + ',' + val);
+            ta.val('');
+            return false;
+        }
+
+
+    }
 
     var shwoalert = function (e, name) {
         var c = '#' + e + ' a';
@@ -69,24 +99,42 @@
         var t = $(o);
         var placeholder = t.find('input').attr('placeholder');
         var tags = t.find('input').val();
-        t.find('input').before('<input class="input_content" placeholder="' + placeholder + '" autofocus="autofocus" />');
+        t.find('input').before('<input class="input_content" placeholder="' + placeholder + '" />');
         if (tags) {
             tag = tags.split(',');
             var oa = '#' + e + ' input:first';
             var ta = $(oa);
             $.each(tag, function (val, item) {
-                ta.before('<a href="javascript:;"><span><span class="glyphicon glyphicon-tags" aria-hidden="true"></span> ' + item + '</span><em>X</em></a>');
+                ta.before('<a href="javascript:;"><span><span class="glyphicon glyphicon-tags" aria-hidden="true" style="margin-right: 5px;"></span>' + item +'</span><em>X</em></a>');
             });
         }
         ;bingbtn(e);
     };
 
-    var deltags = function (e, delname) {
+    var deltags = function (e,delname) {
         var o = '#' + e;
         var t = $(o);
-        var tags = t.find('input').last('input').val();
-        var tag = tags.split(',');
-        tag.splice($.inArray(delname, tag), 1);
-        t.find('input').last('input').val(tag);
+        var tags = t.find('input').last('input').val().toString();
+        var tag1 = tags.split(',');
+        if (tag1.length==1){
+            t.find('input').last('input').val("");
+        }
+        var num = $.inArray(delname,tag1);
+         tag1.splice(num, 1);
+        t.find('input').last('input').val(tag1.toString());
     }
-})(jQuery)
+})(jQuery);
+
+function  tapTags(e) {
+var lastChild = e.lastChild;
+    $.tapAddTags('tags',lastChild.innerHTML);
+}
+function showORHide() {
+
+      $("#nav-tags").show();
+
+
+
+}
+
+

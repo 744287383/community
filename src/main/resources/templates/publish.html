@@ -7,9 +7,12 @@
     <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="/css/navPublic.css">
     <link rel="stylesheet" href="/css/publish.css">
+    <link rel="stylesheet" href="/css/input_tags.css">
     <script src="/js/jquery.js"></script>
     <script type="application/javascript" src="/js/bootstrap.min.js"></script>
     <script src="/js/community.js"></script>
+    <script src="/js/input_tags.js"></script>
+
 
 
 </head>
@@ -38,10 +41,54 @@
                 <div class="form-group">
                     <label for="tags">添加标签:</label>
                     <span class="remind" th:errors="${questionDTO.tags}"></span>
-                    <input type="text" class="form-control" id="tags" name="tags" placeholder="输入标签以','号隔开" th:value="${questionDTO.tags}">
+                    <DIV class="input_box" id="tags" onclick="showORHide()">
+
+                        <INPUT name="tags" class="input_tags form-control" type="text" placeholder="输入后回车添加标签" th:value="${questionDTO.tags}">
+                    </DIV>
+                    <div id="nav-tags" hidden="hidden" style="margin-top: 15px;">
+
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active"><a href="#one" aria-controls="home" role="tab" data-toggle="tab">开发语言</a></li>
+                            <li role="presentation"><a href="#two" aria-controls="profile" role="tab" data-toggle="tab">平台架构</a></li>
+                            <li role="presentation"><a href="#three" aria-controls="profile" role="tab" data-toggle="tab">服务器</a></li>
+                            <li role="presentation"><a href="#four" aria-controls="profile" role="tab" data-toggle="tab">数据库</a></li>
+                            <li role="presentation"><a href="#five" aria-controls="profile" role="tab" data-toggle="tab">开发工具</a></li>
+                        </ul>
+
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane active" id="one">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 tags-item-list">
+                                <span  th:each="tag:${tagsDTO.language.split(',')}" class=" tags-case" onclick="tapTags(this)"><span class="glyphicon glyphicon-tags" aria-hidden="true"></span> <span th:text="${tag}"></span></span>
+                                </div>
+                                </div>
+                            <div role="tabpanel" class="tab-pane" id="two">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 tags-item-list">
+                                <span  th:each="tag:${tagsDTO.framework.split(',')}" class=" tags-case" onclick="tapTags(this)"><span class="glyphicon glyphicon-tags" aria-hidden="true"></span> <span th:text="${tag}"></span></span>
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="three">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 tags-item-list">
+                                <span  th:each="tag:${tagsDTO.server.split(',')}" class=" tags-case" onclick="tapTags(this)"><span class="glyphicon glyphicon-tags" aria-hidden="true"></span> <span th:text="${tag}"></span></span>
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="four">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 tags-item-list">
+                                <span  th:each="tag:${tagsDTO.database.split(',')}" class=" tags-case" onclick="tapTags(this)"><span class="glyphicon glyphicon-tags" aria-hidden="true"></span> <span th:text="${tag}"></span></span>
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="five">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 tags-item-list">
+                                <span  th:each="tag:${tagsDTO.tool.split(',')}" class=" tags-case" onclick="tapTags(this)"><span class="glyphicon glyphicon-tags" aria-hidden="true"></span> <span th:text="${tag}"></span></span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
-                <input th:hidden="true"  name="id"  th:value="${questionDTO.id}">
-                <input  th:hidden="true" name="creator"  th:value="${questionDTO.creator}">
+                <input th:hidden="true" type="text" name="id"  th:value="${questionDTO.id}">
+                <input  th:hidden="true" type="text"  name="creator"  th:value="${questionDTO.creator}">
                 <button type="submit" class="btn btn-success form-btn" th:text="${actionName}"></button>
             </form>
 
@@ -58,4 +105,20 @@
 </div>
 
 </body>
+<SCRIPT>
+    //初始化并调用$.FreeTags()  传入参数为 id
+    /**
+     HTML：
+
+     <div class="input_box" id="tags">
+     <input type="text" class="input_tags" name="tags" value="测试,标签,Tags,Input,value" placeholder="请输入文字" />
+     </div>
+
+     JS:
+     $.FreeTags('tags');
+     */
+    $(document).ready(function(e){
+        $.FreeTags('tags');
+    });
+</SCRIPT>
 </html>

@@ -1,6 +1,7 @@
 package com.community.jian.community.Controller;
 
 import com.community.jian.community.dto.QuestionDTO;
+import com.community.jian.community.dto.TagsDTO;
 import com.community.jian.community.model.Question;
 import com.community.jian.community.model.User;
 import com.community.jian.community.service.QuestionService;
@@ -21,6 +22,8 @@ public class PublishController {
 
     @Autowired
     private QuestionService questionService;
+    @Autowired
+    private TagsDTO tagsDTO;
 
     @GetMapping("/editQuestion/{id}")
     public String edit(@PathVariable("id") Integer id,Model model){
@@ -28,7 +31,8 @@ public class PublishController {
         model.addAttribute("questionDTO",questionDTO);
         model.addAttribute("actionName","编辑");
         model.addAttribute("action","提交");
-
+        System.out.println(tagsDTO.toString());
+        model.addAttribute("tagsDTO",tagsDTO);
         return "publish";
     }
 
@@ -37,6 +41,8 @@ public class PublishController {
     public String publish(Model model, QuestionDTO questionDTO) {
         model.addAttribute("actionName","发起");
         model.addAttribute("action","发布");
+        System.out.println(tagsDTO.toString());
+        model.addAttribute("tagsDTO",tagsDTO);
         return "publish";
     }
 
@@ -49,6 +55,7 @@ public class PublishController {
         Question question=new Question();
         //校验出错时返回原来的页面
         if (bindingResult.hasErrors()) {
+            model.addAttribute("tagsDTO",tagsDTO);
             if (questionDTO.getId()!=null){
                 model.addAttribute("actionName","编辑");
                 model.addAttribute("action","提交");
