@@ -34,4 +34,7 @@
   <select id="addCommentCount" parameterType="Integer">
    update QUESTION set COMMENT_COUNT=COMMENT_COUNT+1 where ID=#{id}
   </select>
+  <select id="getRelateQuestion" resultType="Question">
+    select ID,TITLE from QUESTION where id !=#{id} and tags regexp #{tags} order by gmt_create desc limit 20
+  </select>
 </mapper>

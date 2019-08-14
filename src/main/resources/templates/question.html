@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="/css/question.css">
     <script th:inline="javascript">
         var client_id=[[${pioneer.client_id}]];
-        var redirectUrl=[[${pioneer.redirectUrl}]];
+        var redirectUrl=[[${'http://'+#request.getServerName()+'/fallback'}]];
     </script>
     <script id="reply-template" type="text/x-handlebars-template">
         <div class=" media comment-reply comment-reply-underLine">
@@ -177,6 +177,12 @@
             <hr>
             <br>
             <h3>相关问题</h3>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding: 0px;">
+
+                <ul class="list-unstyled">
+                    <li th:each="relate:${relateQuestion}"><a th:href="${'/question/'+relate.id}"><span th:text="${relate.title}"></span></a></li>
+                </ul>
+            </div>
             <hr>
         </div>
     </div>

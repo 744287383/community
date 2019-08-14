@@ -19,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class QuestionServiceIMP implements QuestionService{
@@ -114,6 +115,23 @@ public class QuestionServiceIMP implements QuestionService{
     @Override
     public void addViewCount(Integer id) {
         questionEXTMapper.addViewCount(id);
+    }
+
+    @Override
+    public List<QuestionDTO> getRelateQuestion(Long id,String tags) {
+        String s = tags.replaceAll(",", "|");
+        System.out.println(s);
+
+        List<Question> questions = questionEXTMapper.getRelateQuestion(id,s);
+        if (questions==null||questions.size()<=0){
+            return new ArrayList<>();
+        }
+        List<QuestionDTO> collect = questions.stream().map(question -> {
+            QuestionDTO questionDTO1 = new QuestionDTO();
+            BeanUtils.copyProperties(question,questionDTO1);
+            return questionDTO1;
+        }).collect(Collectors.toList());
+        return collect;
     }
 
     @NotNull//把question的list转换成questionDTO的list

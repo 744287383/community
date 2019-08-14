@@ -5,6 +5,8 @@ import com.community.jian.community.dto.QuestionDTO;
 import com.community.jian.community.model.Question;
 import com.community.jian.community.model.User;
 
+import java.util.List;
+
 public interface QuestionService {
     int insertQuestion(Question question);
 
@@ -18,4 +20,6 @@ public interface QuestionService {
     void createOrUpdateQuestion(Question question, User user);
 
     void addViewCount(Integer id);
+
+    List<QuestionDTO> getRelateQuestion(Long id,String tags);
 }

@@ -19,8 +19,6 @@ import java.util.Map;
 public class LoginInterceptor implements HandlerInterceptor {
     @Autowired
     private UserService userService;
-    @Value("${github.loginSuccess.redirect.url}")
-    private String redirectUrl;
     @Value("${github.client.client_id}")
     private String client_id;
     @Override
@@ -59,7 +57,6 @@ public class LoginInterceptor implements HandlerInterceptor {
         if(null!=modelAndView) {
             Pioneer pioneer = new Pioneer();
             pioneer.setClient_id(client_id);
-            pioneer.setRedirectUrl(redirectUrl);
             Map<String, Object> model = modelAndView.getModel();
             model.put("pioneer", pioneer);
         }
