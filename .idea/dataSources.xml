@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="community" uuid="cd5cae63-ea0a-41aa-9d88-8c4927db4d62">
+      <driver-ref>h2.unified</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.h2.Driver</jdbc-driver>
+      <jdbc-url>jdbc:h2:file:$PROJECT_DIR$/src/main/resources/db/community</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="cooo" uuid="a51485c4-39b0-4cb6-926d-0651f788ba4f">
+      <driver-ref>h2.unified</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.h2.Driver</jdbc-driver>
+      <jdbc-url>jdbc:h2:~/cooo</jdbc-url>
+    </data-source>
+  </component>
+</project>

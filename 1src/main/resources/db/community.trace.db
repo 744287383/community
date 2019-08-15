@@ -1,0 +1,3 @@
+2019-08-15 15:38:09 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "QUESTION" not found; SQL statement:
+select count(*) from QUESTION [42102-199]

@@ -37,7 +37,7 @@
         <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 left">
             <h2> <span class="glyphicon glyphicon-list question-find" aria-hidden="true"></span>发现</h2>
             <hr/>
-            <div class="media" th:each="question:${paginationDTO.getQuestionDTOs()}">
+            <div class="media" th:each="question:${paginationDTO.data}">
                 <div class="media-left media-middle">
                     <a href="#">
                         <img class="media-object img-thumbnail img-rounded avatar_url" th:src="${question.user.iconUrl}" alt="...">

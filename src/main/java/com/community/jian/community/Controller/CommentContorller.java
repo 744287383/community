@@ -50,7 +50,6 @@ public class CommentContorller {
     @ResponseBody
     public ResultDTO getTwoComment(@PathVariable("id") Long id){
        List<CommentDTO>  commentDTOS=commentService.getTwoCommentDTOS(id);
-        System.out.println(commentDTOS.toString());
         return ResultDTO.successOf(commentDTOS);
     }
 }

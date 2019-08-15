@@ -38,16 +38,15 @@ public class QuestionServiceIMP implements QuestionService{
     @Override
     //获取首页问题列表
     public PaginationDTO list(Integer page, Integer size) {
-        PaginationDTO paginationDTO=new PaginationDTO();
+        PaginationDTO<QuestionDTO> paginationDTO=new PaginationDTO<>();
         Integer count= (int)questionMapper.countByExample(new QuestionExample());
-        paginationDTO.initPage(count,page,size);
-        int offset=paginationDTO.getSize()*(paginationDTO.getPage()-1);
+        int offset = paginationDTO.initPage(count, page, size);
         QuestionExample questionExample = new QuestionExample();
         questionExample.setOrderByClause("id desc");
         List<Question> questions=questionMapper.selectByExampleWithRowbounds(questionExample,new RowBounds(offset,paginationDTO.getSize()));
         List<QuestionDTO> questionDTOs = getQuestionDTOS(questions);
 
-        paginationDTO.setQuestionDTOs(questionDTOs);
+        paginationDTO.setData(questionDTOs);
 
 
         return paginationDTO;
@@ -55,13 +54,12 @@ public class QuestionServiceIMP implements QuestionService{
 
     @Override//获取个人发布问题列表
     public PaginationDTO listById(Integer page, Integer size, Integer id) {
-        PaginationDTO paginationDTO=new PaginationDTO();
+        PaginationDTO<QuestionDTO> paginationDTO=new PaginationDTO<>();
         QuestionExample questionExample = new QuestionExample();
         questionExample.createCriteria()
                 .andCreatorEqualTo(id);
         Integer count=(int)questionMapper.countByExample(questionExample);
-        paginationDTO.initPage(count,page,size);
-        int offset=paginationDTO.getSize()*(paginationDTO.getPage()-1);
+        int offset = paginationDTO.initPage(count, page, size);
         questionExample=new QuestionExample();
 
         questionExample.setOrderByClause("id desc");
@@ -71,7 +69,7 @@ public class QuestionServiceIMP implements QuestionService{
                 new RowBounds(offset,paginationDTO.getSize()));
         List<QuestionDTO> questionDTOs = getQuestionDTOS(questions);
 
-        paginationDTO.setQuestionDTOs(questionDTOs);
+        paginationDTO.setData(questionDTOs);
 
 
         return paginationDTO;
@@ -120,7 +118,6 @@ public class QuestionServiceIMP implements QuestionService{
     @Override
     public List<QuestionDTO> getRelateQuestion(Long id,String tags) {
         String s = tags.replaceAll(",", "|");
-        System.out.println(s);
 
         List<Question> questions = questionEXTMapper.getRelateQuestion(id,s);
         if (questions==null||questions.size()<=0){

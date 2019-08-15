@@ -6,71 +6,135 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
-public class PaginationDTO {
-    private List<QuestionDTO> questionDTOs;
-    private boolean showPrevious;
-    private boolean showNext;
-    private boolean showFirstPage;
-    private boolean showEndPage;
-    private Integer page;
-    private Integer endPage;
-    private List<Integer> pages;
-    private Integer size;
-    public void initPage(Integer totalQuestion,Integer page,Integer size){
-        this.size=size;
-        pages=new ArrayList<>();
+public class PaginationDTO <T> {
 
+    private List<T> data;//页面数据
+    private Integer page;//当前页面的码数
+    private Integer endPage;//末尾页的码数！
+    private List<Integer> pages;//显示出来的页码按钮的码数
+    private Integer size;//一页里多少个数据
+    private boolean showPrevious;//是否显示上一页按钮
+    private boolean showNext;//是否显示下一页按钮
+    private boolean showFirstPage;//是否显示首页按钮
+    private boolean showEndPage;//是否显示末位页的按钮
+
+    /**
+     * @param totalQuestion 总的问题数
+     * @param page 访问第几页的页码数
+     * @param size 一页中多少行数据
+     * @return 返回size*(pageNum-1)即offset，sql语句中的limit offset,sise：
+     * **/
+    public int initPage(Integer totalQuestion,Integer page,Integer size){
+
+        if (totalQuestion<=0){
+            totalQuestion=0;
+        }
+
+        if (size<=0){
+            this.size=1;
+        }else {
+            this.size=size;
+        }
+
+        if (page<1){
+            this.page=1;
+        }
+        else {
+            this.page=page;
+        }
+
+        countEndPage(totalQuestion, size);
+
+        if (this.page>this.endPage){
+            this.page=this.endPage;
+        }
+        countPagesList(totalQuestion);
+        initShowPrevious();
+        initShowNext();
+        initShouFirstPage();
+        initShowEndPage();
+
+
+        return this.size*(this.page-1);
+    }
+    /**
+     * @param totalQuestion 总共的数据量
+     * @param size 页面数据量
+     *  计算出末尾页码，最后的数据不够一页时也要多加一页
+     *
+     * **/
+    private void countEndPage(Integer totalQuestion, Integer size) {
         endPage=0;
         if(totalQuestion%size==0){
             endPage=totalQuestion/size;
         }else {
             endPage=totalQuestion/size+1;
         }
-        if (page<1){
-            page=1;
-        }
-        if (page>endPage){
-            page=endPage;
-        }
-        this.page=page;
-        pages.add(page);
-        for (int i=1;i<=3;i++){
-            if (page-i>0){
-                pages.add(0,page-i);
-            }
-        }
-        for (int i=1;i<=3;i++){
-            if (page+i<=endPage){
-                pages.add(page+i);
-            }
-        }
+    }
 
-        if(this.page==1 || this.page==0){
-            this.showPrevious=false;
-        }else {
-            this.showPrevious=true;
-        }
-        if (this.page==endPage){
-            this.showNext=false;
-        }else {
-            this.showNext=true;
-        }
-
-        if ((this.page-3)>1){
-            this.showFirstPage=true;
-        }else {
-            this.showFirstPage=false;
-        }
-
-
+    /**
+     * 当前页码偏移3次后回到大于等于末尾页页码就不显示末尾按钮
+     * **/
+    private void initShowEndPage() {
         if((this.page+3)>=endPage){
             this.showEndPage=false;
         }else {
             this.showEndPage=true;
         }
+    }
+    /**
+     * 当前页码偏移3次后回到小于等于第一页页码就不显示首页按钮
+     * **/
+    private void initShouFirstPage() {
+        if ((this.page - 3) <= 1) {
+            this.showFirstPage = false;
+        } else {
+            this.showFirstPage = true;
+        }
+    }
 
+    /**
+     * 当前页码等于最后一页时就不显示下一页按钮
+     * **/
+    private void initShowNext() {
+        if (this.page==endPage){
+            this.showNext=false;
+        }else {
+            this.showNext=true;
+        }
+    }
 
+    /**
+     * 当前页面码数为1或者等于0的时候不显示上一页按钮
+     * **/
+    private void initShowPrevious() {
+        if(this.page==1 || this.page==0){
+            this.showPrevious=false;
+        }else {
+            this.showPrevious=true;
+        }
+    }
 
+    /**
+     * 获取当前页面左边三个页码 ，当前页码，右边变三个页码
+     *
+     * **/
+    private void countPagesList(Integer allNum) {
+        pages=new ArrayList<>();
+        if (allNum==0){
+            return ;
+        }
+        pages.add(this.page);
+        for (int i = 1; i <= 3; i++) {
+            if (this.page - i > 0) {
+                pages.add(0, this.page - i);
+            }
+        }
+        for (int i = 1; i <= 3; i++) {
+            if (this.page + i <= endPage) {
+                pages.add(this.page + i);
+            }
+        }
     }
 
 }

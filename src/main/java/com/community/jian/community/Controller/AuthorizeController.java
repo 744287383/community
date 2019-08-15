@@ -38,20 +38,20 @@ public class AuthorizeController {
                            Model model,
                            HttpServletRequest request,
                            HttpServletResponse response) {
-        model.addAttribute("redirectUrl", redirectUrl);
         AccessTokenDTO accessTokenDTO = new AccessTokenDTO();
         accessTokenDTO.setClient_id(client_id);
         accessTokenDTO.setClient_secret(client_secret);
         accessTokenDTO.setCode(code);
         accessTokenDTO.setState(state);
-        accessTokenDTO.setRedirect_uri(redirectUrl);
+        accessTokenDTO.setRedirect_uri(request.getScheme()+"://"+request.getServerName()+"/fallback");
 
         //请求Github的API获取accountid name bio
         String accessToken = githubProvider.getAccessToken(accessTokenDTO);
         GithubUser githubUser = githubProvider.getUser(accessToken);
 
 
-        if (null != githubUser) {
+
+        if (null != githubUser&&null!=githubUser.getId()) {
             User user=new User();
             user.setAccountId(String.valueOf(githubUser.getId()));
             user.setName(githubUser.getName());

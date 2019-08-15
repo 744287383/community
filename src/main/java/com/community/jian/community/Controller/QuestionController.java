@@ -26,7 +26,6 @@ public class QuestionController {
         model.addAttribute("questionDTO",questionDTO);
         List<QuestionDTO> relateQuestion=questionService.getRelateQuestion(questionDTO.getId(),questionDTO.getTags());
         model.addAttribute("relateQuestion",relateQuestion);
-        System.out.println(relateQuestion.toString());
         List<CommentDTO> commentDTOS =commentService.getOneComment(Long.valueOf(id));
         model.addAttribute("commentDTOS",commentDTOS);
     return "question";
