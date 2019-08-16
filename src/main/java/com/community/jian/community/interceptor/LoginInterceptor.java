@@ -2,6 +2,7 @@ package com.community.jian.community.interceptor;
 
 import com.community.jian.community.dto.Pioneer;
 import com.community.jian.community.model.User;
+import com.community.jian.community.service.NotificationService;
 import com.community.jian.community.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -19,6 +20,8 @@ import java.util.Map;
 public class LoginInterceptor implements HandlerInterceptor {
     @Autowired
     private UserService userService;
+    @Autowired
+    private NotificationService notificationService;
     @Value("${github.client.client_id}")
     private String client_id;
     @Override
@@ -41,10 +44,14 @@ public class LoginInterceptor implements HandlerInterceptor {
                 user=userService.findUserByToken(token);
                 if (null!=user){
                     request.getSession().setAttribute("user",user);
+                    Integer unread= notificationService.countUnread(user.getId());
+                    request.getSession().setAttribute("unread",unread);
                 }
             }
             return true;
         }else {
+           Integer unread= notificationService.countUnread(user.getId());
+            request.getSession().setAttribute("unread",unread);
            return true;
         }
 

@@ -3,14 +3,14 @@ package com.community.jian.community.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CommentExample {
+public class NotificationExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public CommentExample() {
+    public NotificationExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -164,123 +164,123 @@ public class CommentExample {
             return (Criteria) this;
         }
 
-        public Criteria andParentIdIsNull() {
-            addCriterion("PARENT_ID is null");
+        public Criteria andSenderIsNull() {
+            addCriterion("SENDER is null");
             return (Criteria) this;
         }
 
-        public Criteria andParentIdIsNotNull() {
-            addCriterion("PARENT_ID is not null");
+        public Criteria andSenderIsNotNull() {
+            addCriterion("SENDER is not null");
             return (Criteria) this;
         }
 
-        public Criteria andParentIdEqualTo(Long value) {
-            addCriterion("PARENT_ID =", value, "parentId");
+        public Criteria andSenderEqualTo(Long value) {
+            addCriterion("SENDER =", value, "sender");
             return (Criteria) this;
         }
 
-        public Criteria andParentIdNotEqualTo(Long value) {
-            addCriterion("PARENT_ID <>", value, "parentId");
+        public Criteria andSenderNotEqualTo(Long value) {
+            addCriterion("SENDER <>", value, "sender");
             return (Criteria) this;
         }
 
-        public Criteria andParentIdGreaterThan(Long value) {
-            addCriterion("PARENT_ID >", value, "parentId");
+        public Criteria andSenderGreaterThan(Long value) {
+            addCriterion("SENDER >", value, "sender");
             return (Criteria) this;
         }
 
-        public Criteria andParentIdGreaterThanOrEqualTo(Long value) {
-            addCriterion("PARENT_ID >=", value, "parentId");
+        public Criteria andSenderGreaterThanOrEqualTo(Long value) {
+            addCriterion("SENDER >=", value, "sender");
             return (Criteria) this;
         }
 
-        public Criteria andParentIdLessThan(Long value) {
-            addCriterion("PARENT_ID <", value, "parentId");
+        public Criteria andSenderLessThan(Long value) {
+            addCriterion("SENDER <", value, "sender");
             return (Criteria) this;
         }
 
-        public Criteria andParentIdLessThanOrEqualTo(Long value) {
-            addCriterion("PARENT_ID <=", value, "parentId");
+        public Criteria andSenderLessThanOrEqualTo(Long value) {
+            addCriterion("SENDER <=", value, "sender");
             return (Criteria) this;
         }
 
-        public Criteria andParentIdIn(List<Long> values) {
-            addCriterion("PARENT_ID in", values, "parentId");
+        public Criteria andSenderIn(List<Long> values) {
+            addCriterion("SENDER in", values, "sender");
             return (Criteria) this;
         }
 
-        public Criteria andParentIdNotIn(List<Long> values) {
-            addCriterion("PARENT_ID not in", values, "parentId");
+        public Criteria andSenderNotIn(List<Long> values) {
+            addCriterion("SENDER not in", values, "sender");
             return (Criteria) this;
         }
 
-        public Criteria andParentIdBetween(Long value1, Long value2) {
-            addCriterion("PARENT_ID between", value1, value2, "parentId");
+        public Criteria andSenderBetween(Long value1, Long value2) {
+            addCriterion("SENDER between", value1, value2, "sender");
             return (Criteria) this;
         }
 
-        public Criteria andParentIdNotBetween(Long value1, Long value2) {
-            addCriterion("PARENT_ID not between", value1, value2, "parentId");
+        public Criteria andSenderNotBetween(Long value1, Long value2) {
+            addCriterion("SENDER not between", value1, value2, "sender");
             return (Criteria) this;
         }
 
-        public Criteria andCommentorIsNull() {
-            addCriterion("COMMENTOR is null");
+        public Criteria andRecipientIsNull() {
+            addCriterion("RECIPIENT is null");
             return (Criteria) this;
         }
 
-        public Criteria andCommentorIsNotNull() {
-            addCriterion("COMMENTOR is not null");
+        public Criteria andRecipientIsNotNull() {
+            addCriterion("RECIPIENT is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCommentorEqualTo(Long value) {
-            addCriterion("COMMENTOR =", value, "commentor");
+        public Criteria andRecipientEqualTo(Long value) {
+            addCriterion("RECIPIENT =", value, "recipient");
             return (Criteria) this;
         }
 
-        public Criteria andCommentorNotEqualTo(Long value) {
-            addCriterion("COMMENTOR <>", value, "commentor");
+        public Criteria andRecipientNotEqualTo(Long value) {
+            addCriterion("RECIPIENT <>", value, "recipient");
             return (Criteria) this;
         }
 
-        public Criteria andCommentorGreaterThan(Long value) {
-            addCriterion("COMMENTOR >", value, "commentor");
+        public Criteria andRecipientGreaterThan(Long value) {
+            addCriterion("RECIPIENT >", value, "recipient");
             return (Criteria) this;
         }
 
-        public Criteria andCommentorGreaterThanOrEqualTo(Long value) {
-            addCriterion("COMMENTOR >=", value, "commentor");
+        public Criteria andRecipientGreaterThanOrEqualTo(Long value) {
+            addCriterion("RECIPIENT >=", value, "recipient");
             return (Criteria) this;
         }
 
-        public Criteria andCommentorLessThan(Long value) {
-            addCriterion("COMMENTOR <", value, "commentor");
+        public Criteria andRecipientLessThan(Long value) {
+            addCriterion("RECIPIENT <", value, "recipient");
             return (Criteria) this;
         }
 
-        public Criteria andCommentorLessThanOrEqualTo(Long value) {
-            addCriterion("COMMENTOR <=", value, "commentor");
+        public Criteria andRecipientLessThanOrEqualTo(Long value) {
+            addCriterion("RECIPIENT <=", value, "recipient");
             return (Criteria) this;
         }
 
-        public Criteria andCommentorIn(List<Long> values) {
-            addCriterion("COMMENTOR in", values, "commentor");
+        public Criteria andRecipientIn(List<Long> values) {
+            addCriterion("RECIPIENT in", values, "recipient");
             return (Criteria) this;
         }
 
-        public Criteria andCommentorNotIn(List<Long> values) {
-            addCriterion("COMMENTOR not in", values, "commentor");
+        public Criteria andRecipientNotIn(List<Long> values) {
+            addCriterion("RECIPIENT not in", values, "recipient");
             return (Criteria) this;
         }
 
-        public Criteria andCommentorBetween(Long value1, Long value2) {
-            addCriterion("COMMENTOR between", value1, value2, "commentor");
+        public Criteria andRecipientBetween(Long value1, Long value2) {
+            addCriterion("RECIPIENT between", value1, value2, "recipient");
             return (Criteria) this;
         }
 
-        public Criteria andCommentorNotBetween(Long value1, Long value2) {
-            addCriterion("COMMENTOR not between", value1, value2, "commentor");
+        public Criteria andRecipientNotBetween(Long value1, Long value2) {
+            addCriterion("RECIPIENT not between", value1, value2, "recipient");
             return (Criteria) this;
         }
 
@@ -344,73 +344,123 @@ public class CommentExample {
             return (Criteria) this;
         }
 
-        public Criteria andContentIsNull() {
-            addCriterion("CONTENT is null");
+        public Criteria andAutoridIsNull() {
+            addCriterion("AUTORID is null");
             return (Criteria) this;
         }
 
-        public Criteria andContentIsNotNull() {
-            addCriterion("CONTENT is not null");
+        public Criteria andAutoridIsNotNull() {
+            addCriterion("AUTORID is not null");
             return (Criteria) this;
         }
 
-        public Criteria andContentEqualTo(String value) {
-            addCriterion("CONTENT =", value, "content");
+        public Criteria andAutoridEqualTo(Long value) {
+            addCriterion("AUTORID =", value, "autorid");
             return (Criteria) this;
         }
 
-        public Criteria andContentNotEqualTo(String value) {
-            addCriterion("CONTENT <>", value, "content");
+        public Criteria andAutoridNotEqualTo(Long value) {
+            addCriterion("AUTORID <>", value, "autorid");
             return (Criteria) this;
         }
 
-        public Criteria andContentGreaterThan(String value) {
-            addCriterion("CONTENT >", value, "content");
+        public Criteria andAutoridGreaterThan(Long value) {
+            addCriterion("AUTORID >", value, "autorid");
             return (Criteria) this;
         }
 
-        public Criteria andContentGreaterThanOrEqualTo(String value) {
-            addCriterion("CONTENT >=", value, "content");
+        public Criteria andAutoridGreaterThanOrEqualTo(Long value) {
+            addCriterion("AUTORID >=", value, "autorid");
             return (Criteria) this;
         }
 
-        public Criteria andContentLessThan(String value) {
-            addCriterion("CONTENT <", value, "content");
+        public Criteria andAutoridLessThan(Long value) {
+            addCriterion("AUTORID <", value, "autorid");
             return (Criteria) this;
         }
 
-        public Criteria andContentLessThanOrEqualTo(String value) {
-            addCriterion("CONTENT <=", value, "content");
+        public Criteria andAutoridLessThanOrEqualTo(Long value) {
+            addCriterion("AUTORID <=", value, "autorid");
             return (Criteria) this;
         }
 
-        public Criteria andContentLike(String value) {
-            addCriterion("CONTENT like", value, "content");
+        public Criteria andAutoridIn(List<Long> values) {
+            addCriterion("AUTORID in", values, "autorid");
             return (Criteria) this;
         }
 
-        public Criteria andContentNotLike(String value) {
-            addCriterion("CONTENT not like", value, "content");
+        public Criteria andAutoridNotIn(List<Long> values) {
+            addCriterion("AUTORID not in", values, "autorid");
             return (Criteria) this;
         }
 
-        public Criteria andContentIn(List<String> values) {
-            addCriterion("CONTENT in", values, "content");
+        public Criteria andAutoridBetween(Long value1, Long value2) {
+            addCriterion("AUTORID between", value1, value2, "autorid");
             return (Criteria) this;
         }
 
-        public Criteria andContentNotIn(List<String> values) {
-            addCriterion("CONTENT not in", values, "content");
+        public Criteria andAutoridNotBetween(Long value1, Long value2) {
+            addCriterion("AUTORID not between", value1, value2, "autorid");
             return (Criteria) this;
         }
 
-        public Criteria andContentBetween(String value1, String value2) {
-            addCriterion("CONTENT between", value1, value2, "content");
+        public Criteria andStatusIsNull() {
+            addCriterion("STATUS is null");
             return (Criteria) this;
         }
 
-        public Criteria andContentNotBetween(String value1, String value2) {
-            addCriterion("CONTENT not between", value1, value2, "content");
+        public Criteria andStatusIsNotNull() {
+            addCriterion("STATUS is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusEqualTo(Integer value) {
+            addCriterion("STATUS =", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusNotEqualTo(Integer value) {
+            addCriterion("STATUS <>", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusGreaterThan(Integer value) {
+            addCriterion("STATUS >", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusGreaterThanOrEqualTo(Integer value) {
+            addCriterion("STATUS >=", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusLessThan(Integer value) {
+            addCriterion("STATUS <", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusLessThanOrEqualTo(Integer value) {
+            addCriterion("STATUS <=", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusIn(List<Integer> values) {
+            addCriterion("STATUS in", values, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusNotIn(List<Integer> values) {
+            addCriterion("STATUS not in", values, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusBetween(Integer value1, Integer value2) {
+            addCriterion("STATUS between", value1, value2, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusNotBetween(Integer value1, Integer value2) {
+            addCriterion("STATUS not between", value1, value2, "status");
             return (Criteria) this;
         }
 
@@ -474,243 +524,143 @@ public class CommentExample {
             return (Criteria) this;
         }
 
-        public Criteria andGmtModifiedIsNull() {
-            addCriterion("GMT_MODIFIED is null");
+        public Criteria andSenderNameIsNull() {
+            addCriterion("SENDER_NAME is null");
             return (Criteria) this;
         }
 
-        public Criteria andGmtModifiedIsNotNull() {
-            addCriterion("GMT_MODIFIED is not null");
+        public Criteria andSenderNameIsNotNull() {
+            addCriterion("SENDER_NAME is not null");
             return (Criteria) this;
         }
 
-        public Criteria andGmtModifiedEqualTo(Long value) {
-            addCriterion("GMT_MODIFIED =", value, "gmtModified");
+        public Criteria andSenderNameEqualTo(String value) {
+            addCriterion("SENDER_NAME =", value, "senderName");
             return (Criteria) this;
         }
 
-        public Criteria andGmtModifiedNotEqualTo(Long value) {
-            addCriterion("GMT_MODIFIED <>", value, "gmtModified");
+        public Criteria andSenderNameNotEqualTo(String value) {
+            addCriterion("SENDER_NAME <>", value, "senderName");
             return (Criteria) this;
         }
 
-        public Criteria andGmtModifiedGreaterThan(Long value) {
-            addCriterion("GMT_MODIFIED >", value, "gmtModified");
+        public Criteria andSenderNameGreaterThan(String value) {
+            addCriterion("SENDER_NAME >", value, "senderName");
             return (Criteria) this;
         }
 
-        public Criteria andGmtModifiedGreaterThanOrEqualTo(Long value) {
-            addCriterion("GMT_MODIFIED >=", value, "gmtModified");
+        public Criteria andSenderNameGreaterThanOrEqualTo(String value) {
+            addCriterion("SENDER_NAME >=", value, "senderName");
             return (Criteria) this;
         }
 
-        public Criteria andGmtModifiedLessThan(Long value) {
-            addCriterion("GMT_MODIFIED <", value, "gmtModified");
+        public Criteria andSenderNameLessThan(String value) {
+            addCriterion("SENDER_NAME <", value, "senderName");
             return (Criteria) this;
         }
 
-        public Criteria andGmtModifiedLessThanOrEqualTo(Long value) {
-            addCriterion("GMT_MODIFIED <=", value, "gmtModified");
+        public Criteria andSenderNameLessThanOrEqualTo(String value) {
+            addCriterion("SENDER_NAME <=", value, "senderName");
             return (Criteria) this;
         }
 
-        public Criteria andGmtModifiedIn(List<Long> values) {
-            addCriterion("GMT_MODIFIED in", values, "gmtModified");
+        public Criteria andSenderNameLike(String value) {
+            addCriterion("SENDER_NAME like", value, "senderName");
             return (Criteria) this;
         }
 
-        public Criteria andGmtModifiedNotIn(List<Long> values) {
-            addCriterion("GMT_MODIFIED not in", values, "gmtModified");
+        public Criteria andSenderNameNotLike(String value) {
+            addCriterion("SENDER_NAME not like", value, "senderName");
             return (Criteria) this;
         }
 
-        public Criteria andGmtModifiedBetween(Long value1, Long value2) {
-            addCriterion("GMT_MODIFIED between", value1, value2, "gmtModified");
+        public Criteria andSenderNameIn(List<String> values) {
+            addCriterion("SENDER_NAME in", values, "senderName");
             return (Criteria) this;
         }
 
-        public Criteria andGmtModifiedNotBetween(Long value1, Long value2) {
-            addCriterion("GMT_MODIFIED not between", value1, value2, "gmtModified");
+        public Criteria andSenderNameNotIn(List<String> values) {
+            addCriterion("SENDER_NAME not in", values, "senderName");
             return (Criteria) this;
         }
 
-        public Criteria andLikeCountIsNull() {
-            addCriterion("LIKE_COUNT is null");
+        public Criteria andSenderNameBetween(String value1, String value2) {
+            addCriterion("SENDER_NAME between", value1, value2, "senderName");
             return (Criteria) this;
         }
 
-        public Criteria andLikeCountIsNotNull() {
-            addCriterion("LIKE_COUNT is not null");
+        public Criteria andSenderNameNotBetween(String value1, String value2) {
+            addCriterion("SENDER_NAME not between", value1, value2, "senderName");
             return (Criteria) this;
         }
 
-        public Criteria andLikeCountEqualTo(Long value) {
-            addCriterion("LIKE_COUNT =", value, "likeCount");
+        public Criteria andAutorTitleIsNull() {
+            addCriterion("AUTOR_TITLE is null");
             return (Criteria) this;
         }
 
-        public Criteria andLikeCountNotEqualTo(Long value) {
-            addCriterion("LIKE_COUNT <>", value, "likeCount");
+        public Criteria andAutorTitleIsNotNull() {
+            addCriterion("AUTOR_TITLE is not null");
             return (Criteria) this;
         }
 
-        public Criteria andLikeCountGreaterThan(Long value) {
-            addCriterion("LIKE_COUNT >", value, "likeCount");
+        public Criteria andAutorTitleEqualTo(String value) {
+            addCriterion("AUTOR_TITLE =", value, "autorTitle");
             return (Criteria) this;
         }
 
-        public Criteria andLikeCountGreaterThanOrEqualTo(Long value) {
-            addCriterion("LIKE_COUNT >=", value, "likeCount");
+        public Criteria andAutorTitleNotEqualTo(String value) {
+            addCriterion("AUTOR_TITLE <>", value, "autorTitle");
             return (Criteria) this;
         }
 
-        public Criteria andLikeCountLessThan(Long value) {
-            addCriterion("LIKE_COUNT <", value, "likeCount");
+        public Criteria andAutorTitleGreaterThan(String value) {
+            addCriterion("AUTOR_TITLE >", value, "autorTitle");
             return (Criteria) this;
         }
 
-        public Criteria andLikeCountLessThanOrEqualTo(Long value) {
-            addCriterion("LIKE_COUNT <=", value, "likeCount");
+        public Criteria andAutorTitleGreaterThanOrEqualTo(String value) {
+            addCriterion("AUTOR_TITLE >=", value, "autorTitle");
             return (Criteria) this;
         }
 
-        public Criteria andLikeCountIn(List<Long> values) {
-            addCriterion("LIKE_COUNT in", values, "likeCount");
+        public Criteria andAutorTitleLessThan(String value) {
+            addCriterion("AUTOR_TITLE <", value, "autorTitle");
             return (Criteria) this;
         }
 
-        public Criteria andLikeCountNotIn(List<Long> values) {
-            addCriterion("LIKE_COUNT not in", values, "likeCount");
+        public Criteria andAutorTitleLessThanOrEqualTo(String value) {
+            addCriterion("AUTOR_TITLE <=", value, "autorTitle");
             return (Criteria) this;
         }
 
-        public Criteria andLikeCountBetween(Long value1, Long value2) {
-            addCriterion("LIKE_COUNT between", value1, value2, "likeCount");
+        public Criteria andAutorTitleLike(String value) {
+            addCriterion("AUTOR_TITLE like", value, "autorTitle");
             return (Criteria) this;
         }
 
-        public Criteria andLikeCountNotBetween(Long value1, Long value2) {
-            addCriterion("LIKE_COUNT not between", value1, value2, "likeCount");
+        public Criteria andAutorTitleNotLike(String value) {
+            addCriterion("AUTOR_TITLE not like", value, "autorTitle");
             return (Criteria) this;
         }
 
-        public Criteria andCommentCountIsNull() {
-            addCriterion("COMMENT_COUNT is null");
+        public Criteria andAutorTitleIn(List<String> values) {
+            addCriterion("AUTOR_TITLE in", values, "autorTitle");
             return (Criteria) this;
         }
 
-        public Criteria andCommentCountIsNotNull() {
-            addCriterion("COMMENT_COUNT is not null");
+        public Criteria andAutorTitleNotIn(List<String> values) {
+            addCriterion("AUTOR_TITLE not in", values, "autorTitle");
             return (Criteria) this;
         }
 
-        public Criteria andCommentCountEqualTo(Long value) {
-            addCriterion("COMMENT_COUNT =", value, "commentCount");
+        public Criteria andAutorTitleBetween(String value1, String value2) {
+            addCriterion("AUTOR_TITLE between", value1, value2, "autorTitle");
             return (Criteria) this;
         }
 
-        public Criteria andCommentCountNotEqualTo(Long value) {
-            addCriterion("COMMENT_COUNT <>", value, "commentCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andCommentCountGreaterThan(Long value) {
-            addCriterion("COMMENT_COUNT >", value, "commentCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andCommentCountGreaterThanOrEqualTo(Long value) {
-            addCriterion("COMMENT_COUNT >=", value, "commentCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andCommentCountLessThan(Long value) {
-            addCriterion("COMMENT_COUNT <", value, "commentCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andCommentCountLessThanOrEqualTo(Long value) {
-            addCriterion("COMMENT_COUNT <=", value, "commentCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andCommentCountIn(List<Long> values) {
-            addCriterion("COMMENT_COUNT in", values, "commentCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andCommentCountNotIn(List<Long> values) {
-            addCriterion("COMMENT_COUNT not in", values, "commentCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andCommentCountBetween(Long value1, Long value2) {
-            addCriterion("COMMENT_COUNT between", value1, value2, "commentCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andCommentCountNotBetween(Long value1, Long value2) {
-            addCriterion("COMMENT_COUNT not between", value1, value2, "commentCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andToIdIsNull() {
-            addCriterion("TO_ID is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andToIdIsNotNull() {
-            addCriterion("TO_ID is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andToIdEqualTo(Long value) {
-            addCriterion("TO_ID =", value, "toId");
-            return (Criteria) this;
-        }
-
-        public Criteria andToIdNotEqualTo(Long value) {
-            addCriterion("TO_ID <>", value, "toId");
-            return (Criteria) this;
-        }
-
-        public Criteria andToIdGreaterThan(Long value) {
-            addCriterion("TO_ID >", value, "toId");
-            return (Criteria) this;
-        }
-
-        public Criteria andToIdGreaterThanOrEqualTo(Long value) {
-            addCriterion("TO_ID >=", value, "toId");
-            return (Criteria) this;
-        }
-
-        public Criteria andToIdLessThan(Long value) {
-            addCriterion("TO_ID <", value, "toId");
-            return (Criteria) this;
-        }
-
-        public Criteria andToIdLessThanOrEqualTo(Long value) {
-            addCriterion("TO_ID <=", value, "toId");
-            return (Criteria) this;
-        }
-
-        public Criteria andToIdIn(List<Long> values) {
-            addCriterion("TO_ID in", values, "toId");
-            return (Criteria) this;
-        }
-
-        public Criteria andToIdNotIn(List<Long> values) {
-            addCriterion("TO_ID not in", values, "toId");
-            return (Criteria) this;
-        }
-
-        public Criteria andToIdBetween(Long value1, Long value2) {
-            addCriterion("TO_ID between", value1, value2, "toId");
-            return (Criteria) this;
-        }
-
-        public Criteria andToIdNotBetween(Long value1, Long value2) {
-            addCriterion("TO_ID not between", value1, value2, "toId");
+        public Criteria andAutorTitleNotBetween(String value1, String value2) {
+            addCriterion("AUTOR_TITLE not between", value1, value2, "autorTitle");
             return (Criteria) this;
         }
     }

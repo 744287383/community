@@ -2,6 +2,8 @@ package com.community.jian.community.service;
 
 import com.community.jian.community.dto.CommentDTO;
 import com.community.jian.community.dto.CommentTypeEnum;
+import com.community.jian.community.dto.NotificationStatusEum;
+import com.community.jian.community.dto.NotificationTypeEnum;
 import com.community.jian.community.exception.CommentErrorMessage;
 import com.community.jian.community.exception.CommentException;
 import com.community.jian.community.mapper.*;
@@ -12,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -29,55 +32,86 @@ public class CommentServiceIMP implements CommentService {
     private UserMapper userMapper;
     @Autowired
     private CommentEXTMapper commentEXTMapper;
+    @Autowired
+    private NotificationMapper notificationMapper;
+
     @Override
-    public int  insertComment(Comment comment) {
+    public int insertComment(Comment comment) {
 
         return commentMapper.insertSelective(comment);
     }
 
     @Override
     @Transactional
-    public void addComment(Comment comment) {
+    public void addComment(Comment comment, User user) {
 
-        if (null==comment.getParentId()||0==comment.getParentId()){
+        if (null == comment.getParentId() || 0 == comment.getParentId()) {
             throw new CommentException(CommentErrorMessage.NOT_FOUNT_QUESTION);
         }
 
-        if (!CommentTypeEnum.isCommentType(comment.getType())){
-        throw new CommentException(CommentErrorMessage.COMMENT_TYPE_ERROR);
+        if (!CommentTypeEnum.isCommentType(comment.getType())) {
+            throw new CommentException(CommentErrorMessage.COMMENT_TYPE_ERROR);
         }
 
-        if (CommentTypeEnum.Comment_TYPE_FATHER.getType()==comment.getType()){
+        if (CommentTypeEnum.Comment_TYPE_FATHER.getType() == comment.getType()) {
             //一级评论
+
             Question question = questionMapper.selectByPrimaryKey(comment.getParentId());
-            if (null==question){
+            if (null == question) {
                 throw new CommentException(CommentErrorMessage.NOT_FOUNT_QUESTION);
             }
-            int i = commentMapper.insertSelective(comment);
-            if (1==i){
-                questionEXTMapper.addCommentCount(Math.toIntExact(comment.getParentId()));
-            }
-        }else {
+            commentMapper.insertSelective(comment);
+            questionEXTMapper.addCommentCount(Math.toIntExact(comment.getParentId()));
+
+
+            createNotification(comment, user, question, NotificationTypeEnum.REPLY_QUESTION);
+
+        } else {
             //二级评论
+
             Comment comment1 = commentMapper.selectByPrimaryKey(comment.getParentId());
-            if (comment1==null){
-                throw  new CommentException(CommentErrorMessage.COMMENT_NOT_FOUND);
+
+            if (comment1 == null) {
+                throw new CommentException(CommentErrorMessage.COMMENT_NOT_FOUND);
             }
+            Question question = questionMapper.selectByPrimaryKey(comment1.getParentId());
             commentMapper.insertSelective(comment);
             commentEXTMapper.addCommentCount(comment.getParentId());
 
+            createNotification(comment1, user, question, NotificationTypeEnum.REPLY_COMMENT);
+
         }
 
+    }
+
+    private void createNotification(Comment comment, User user, Question question, NotificationTypeEnum notificationTypeEnum) {
+        Notification notification = new Notification();
+        notification.setSender(comment.getCommentor());
+        notification.setAutorid(question.getId());
+        notification.setSenderName(user.getName());
+        notification.setAutorTitle(question.getTitle());
+        notification.setType(notificationTypeEnum.getType());
+        notification.setStatus(NotificationStatusEum.UNREAD.getStatus());
+        notification.setGmtCreate(System.currentTimeMillis());
+
+        if (comment.getType() == CommentTypeEnum.Comment_TYPE_FATHER.getType()) {
+            notification.setRecipient(Long.valueOf(question.getCreator()));
+        }
+        if (comment.getType() == CommentTypeEnum.Comment_TYPE_SON.getType()) {
+            notification.setRecipient(comment.getParentId());
+        }
+
+        notificationMapper.insertSelective(notification);
     }
 
     @Override
     public List<CommentDTO> getOneComment(Long questionId) {
-        return getCommentDTOS(questionId,CommentTypeEnum.Comment_TYPE_FATHER);
+        return getCommentDTOS(questionId, CommentTypeEnum.Comment_TYPE_FATHER);
     }
 
     @Override
     public List<CommentDTO> getTwoCommentDTOS(Long id) {
-        return getCommentDTOS(id,CommentTypeEnum.Comment_TYPE_SON);
+        return getCommentDTOS(id, CommentTypeEnum.Comment_TYPE_SON);
     }
 
     @NotNull
@@ -88,12 +122,12 @@ public class CommentServiceIMP implements CommentService {
                 .andTypeEqualTo(commentTypeEnum.getType());
         commentExample.setOrderByClause("gmt_create desc");
         List<Comment> comments = commentMapper.selectByExample(commentExample);
-        if (comments==null||comments.size()==0){
-            return  new ArrayList<CommentDTO>();
+        if (comments == null || comments.size() == 0) {
+            return new ArrayList<CommentDTO>();
         }
 
         List<Long> userId = comments.stream().map(comment -> comment.getCommentor()).distinct().collect(Collectors.toList());
-        UserExample userExample=new UserExample();
+        UserExample userExample = new UserExample();
         userExample.or().andIdIn(userId);
         List<User> users = userMapper.selectByExample(userExample);
         Map<Long, User> userMap = users.stream().collect(Collectors.toMap(user -> user.getId(), user -> user));

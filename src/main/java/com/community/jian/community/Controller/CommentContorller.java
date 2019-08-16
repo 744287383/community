@@ -39,7 +39,7 @@ public class CommentContorller {
         comment.setGmtModified(System.currentTimeMillis());
         comment.setCommentor(user.getId());
 
-        commentService.addComment(comment);
+        commentService.addComment(comment,user);
 
 
 

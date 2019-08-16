@@ -7,11 +7,5 @@
       <jdbc-driver>org.h2.Driver</jdbc-driver>
       <jdbc-url>jdbc:h2:file:$PROJECT_DIR$/src/main/resources/db/community</jdbc-url>
     </data-source>
-    <data-source source="LOCAL" name="cooo" uuid="a51485c4-39b0-4cb6-926d-0651f788ba4f">
-      <driver-ref>h2.unified</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>org.h2.Driver</jdbc-driver>
-      <jdbc-url>jdbc:h2:~/cooo</jdbc-url>
-    </data-source>
   </component>
 </project>

@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.community.jian.community.mapper.UserMapper">
-  <resultMap id="BaseResultMap" type="com.community.jian.community.model.User">
+<mapper namespace="com.community.jian.community.mapper.NotificationMapper">
+  <resultMap id="BaseResultMap" type="com.community.jian.community.model.Notification">
     <id column="ID" jdbcType="BIGINT" property="id" />
-    <result column="ACCOUNT_ID" jdbcType="VARCHAR" property="accountId" />
-    <result column="NAME" jdbcType="VARCHAR" property="name" />
-    <result column="BIO" jdbcType="VARCHAR" property="bio" />
-    <result column="TOKEN" jdbcType="CHAR" property="token" />
-    <result column="ICON_URL" jdbcType="VARCHAR" property="iconUrl" />
+    <result column="SENDER" jdbcType="BIGINT" property="sender" />
+    <result column="RECIPIENT" jdbcType="BIGINT" property="recipient" />
+    <result column="TYPE" jdbcType="INTEGER" property="type" />
+    <result column="AUTORID" jdbcType="BIGINT" property="autorid" />
+    <result column="STATUS" jdbcType="INTEGER" property="status" />
     <result column="GMT_CREATE" jdbcType="BIGINT" property="gmtCreate" />
-    <result column="GMT_MODIFIED" jdbcType="BIGINT" property="gmtModified" />
+    <result column="SENDER_NAME" jdbcType="VARCHAR" property="senderName" />
+    <result column="AUTOR_TITLE" jdbcType="VARCHAR" property="autorTitle" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -70,15 +71,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    ID, ACCOUNT_ID, NAME, BIO, TOKEN, ICON_URL, GMT_CREATE, GMT_MODIFIED
+    ID, SENDER, RECIPIENT, TYPE, AUTORID, STATUS, GMT_CREATE, SENDER_NAME, AUTOR_TITLE
   </sql>
-  <select id="selectByExample" parameterType="com.community.jian.community.model.UserExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.community.jian.community.model.NotificationExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from USER
+    from NOTIFICATION
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -89,114 +90,125 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from USER
+    from NOTIFICATION
     where ID = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from USER
+    delete from NOTIFICATION
     where ID = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.community.jian.community.model.UserExample">
-    delete from USER
+  <delete id="deleteByExample" parameterType="com.community.jian.community.model.NotificationExample">
+    delete from NOTIFICATION
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.community.jian.community.model.User">
-    insert into USER (ID, ACCOUNT_ID, NAME, 
-      BIO, TOKEN, ICON_URL, GMT_CREATE, 
-      GMT_MODIFIED)
-    values (#{id,jdbcType=BIGINT}, #{accountId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
-      #{bio,jdbcType=VARCHAR}, #{token,jdbcType=CHAR}, #{iconUrl,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=BIGINT}, 
-      #{gmtModified,jdbcType=BIGINT})
+  <insert id="insert" parameterType="com.community.jian.community.model.Notification">
+    insert into NOTIFICATION (ID, SENDER, RECIPIENT, 
+      TYPE, AUTORID, STATUS, 
+      GMT_CREATE, SENDER_NAME, AUTOR_TITLE
+      )
+    values (#{id,jdbcType=BIGINT}, #{sender,jdbcType=BIGINT}, #{recipient,jdbcType=BIGINT}, 
+      #{type,jdbcType=INTEGER}, #{autorid,jdbcType=BIGINT}, #{status,jdbcType=INTEGER}, 
+      #{gmtCreate,jdbcType=BIGINT}, #{senderName,jdbcType=VARCHAR}, #{autorTitle,jdbcType=VARCHAR}
+      )
   </insert>
-  <insert id="insertSelective" parameterType="com.community.jian.community.model.User">
-    insert into USER
+  <insert id="insertSelective" parameterType="com.community.jian.community.model.Notification">
+    insert into NOTIFICATION
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         ID,
       </if>
-      <if test="accountId != null">
-        ACCOUNT_ID,
+      <if test="sender != null">
+        SENDER,
       </if>
-      <if test="name != null">
-        NAME,
+      <if test="recipient != null">
+        RECIPIENT,
       </if>
-      <if test="bio != null">
-        BIO,
+      <if test="type != null">
+        TYPE,
       </if>
-      <if test="token != null">
-        TOKEN,
+      <if test="autorid != null">
+        AUTORID,
       </if>
-      <if test="iconUrl != null">
-        ICON_URL,
+      <if test="status != null">
+        STATUS,
       </if>
       <if test="gmtCreate != null">
         GMT_CREATE,
       </if>
-      <if test="gmtModified != null">
-        GMT_MODIFIED,
+      <if test="senderName != null">
+        SENDER_NAME,
+      </if>
+      <if test="autorTitle != null">
+        AUTOR_TITLE,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
         #{id,jdbcType=BIGINT},
       </if>
-      <if test="accountId != null">
-        #{accountId,jdbcType=VARCHAR},
+      <if test="sender != null">
+        #{sender,jdbcType=BIGINT},
       </if>
-      <if test="name != null">
-        #{name,jdbcType=VARCHAR},
+      <if test="recipient != null">
+        #{recipient,jdbcType=BIGINT},
       </if>
-      <if test="bio != null">
-        #{bio,jdbcType=VARCHAR},
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
       </if>
-      <if test="token != null">
-        #{token,jdbcType=CHAR},
+      <if test="autorid != null">
+        #{autorid,jdbcType=BIGINT},
       </if>
-      <if test="iconUrl != null">
-        #{iconUrl,jdbcType=VARCHAR},
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
       </if>
       <if test="gmtCreate != null">
         #{gmtCreate,jdbcType=BIGINT},
       </if>
-      <if test="gmtModified != null">
-        #{gmtModified,jdbcType=BIGINT},
+      <if test="senderName != null">
+        #{senderName,jdbcType=VARCHAR},
+      </if>
+      <if test="autorTitle != null">
+        #{autorTitle,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.community.jian.community.model.UserExample" resultType="java.lang.Long">
-    select count(*) from USER
+  <select id="countByExample" parameterType="com.community.jian.community.model.NotificationExample" resultType="java.lang.Long">
+    select count(*) from NOTIFICATION
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update USER
+    update NOTIFICATION
     <set>
       <if test="record.id != null">
         ID = #{record.id,jdbcType=BIGINT},
       </if>
-      <if test="record.accountId != null">
-        ACCOUNT_ID = #{record.accountId,jdbcType=VARCHAR},
+      <if test="record.sender != null">
+        SENDER = #{record.sender,jdbcType=BIGINT},
       </if>
-      <if test="record.name != null">
-        NAME = #{record.name,jdbcType=VARCHAR},
+      <if test="record.recipient != null">
+        RECIPIENT = #{record.recipient,jdbcType=BIGINT},
       </if>
-      <if test="record.bio != null">
-        BIO = #{record.bio,jdbcType=VARCHAR},
+      <if test="record.type != null">
+        TYPE = #{record.type,jdbcType=INTEGER},
       </if>
-      <if test="record.token != null">
-        TOKEN = #{record.token,jdbcType=CHAR},
+      <if test="record.autorid != null">
+        AUTORID = #{record.autorid,jdbcType=BIGINT},
       </if>
-      <if test="record.iconUrl != null">
-        ICON_URL = #{record.iconUrl,jdbcType=VARCHAR},
+      <if test="record.status != null">
+        STATUS = #{record.status,jdbcType=INTEGER},
       </if>
       <if test="record.gmtCreate != null">
         GMT_CREATE = #{record.gmtCreate,jdbcType=BIGINT},
       </if>
-      <if test="record.gmtModified != null">
-        GMT_MODIFIED = #{record.gmtModified,jdbcType=BIGINT},
+      <if test="record.senderName != null">
+        SENDER_NAME = #{record.senderName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.autorTitle != null">
+        AUTOR_TITLE = #{record.autorTitle,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -204,64 +216,69 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update USER
+    update NOTIFICATION
     set ID = #{record.id,jdbcType=BIGINT},
-      ACCOUNT_ID = #{record.accountId,jdbcType=VARCHAR},
-      NAME = #{record.name,jdbcType=VARCHAR},
-      BIO = #{record.bio,jdbcType=VARCHAR},
-      TOKEN = #{record.token,jdbcType=CHAR},
-      ICON_URL = #{record.iconUrl,jdbcType=VARCHAR},
+      SENDER = #{record.sender,jdbcType=BIGINT},
+      RECIPIENT = #{record.recipient,jdbcType=BIGINT},
+      TYPE = #{record.type,jdbcType=INTEGER},
+      AUTORID = #{record.autorid,jdbcType=BIGINT},
+      STATUS = #{record.status,jdbcType=INTEGER},
       GMT_CREATE = #{record.gmtCreate,jdbcType=BIGINT},
-      GMT_MODIFIED = #{record.gmtModified,jdbcType=BIGINT}
+      SENDER_NAME = #{record.senderName,jdbcType=VARCHAR},
+      AUTOR_TITLE = #{record.autorTitle,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.community.jian.community.model.User">
-    update USER
+  <update id="updateByPrimaryKeySelective" parameterType="com.community.jian.community.model.Notification">
+    update NOTIFICATION
     <set>
-      <if test="accountId != null">
-        ACCOUNT_ID = #{accountId,jdbcType=VARCHAR},
+      <if test="sender != null">
+        SENDER = #{sender,jdbcType=BIGINT},
       </if>
-      <if test="name != null">
-        NAME = #{name,jdbcType=VARCHAR},
+      <if test="recipient != null">
+        RECIPIENT = #{recipient,jdbcType=BIGINT},
       </if>
-      <if test="bio != null">
-        BIO = #{bio,jdbcType=VARCHAR},
+      <if test="type != null">
+        TYPE = #{type,jdbcType=INTEGER},
       </if>
-      <if test="token != null">
-        TOKEN = #{token,jdbcType=CHAR},
+      <if test="autorid != null">
+        AUTORID = #{autorid,jdbcType=BIGINT},
       </if>
-      <if test="iconUrl != null">
-        ICON_URL = #{iconUrl,jdbcType=VARCHAR},
+      <if test="status != null">
+        STATUS = #{status,jdbcType=INTEGER},
       </if>
       <if test="gmtCreate != null">
         GMT_CREATE = #{gmtCreate,jdbcType=BIGINT},
       </if>
-      <if test="gmtModified != null">
-        GMT_MODIFIED = #{gmtModified,jdbcType=BIGINT},
+      <if test="senderName != null">
+        SENDER_NAME = #{senderName,jdbcType=VARCHAR},
+      </if>
+      <if test="autorTitle != null">
+        AUTOR_TITLE = #{autorTitle,jdbcType=VARCHAR},
       </if>
     </set>
     where ID = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.community.jian.community.model.User">
-    update USER
-    set ACCOUNT_ID = #{accountId,jdbcType=VARCHAR},
-      NAME = #{name,jdbcType=VARCHAR},
-      BIO = #{bio,jdbcType=VARCHAR},
-      TOKEN = #{token,jdbcType=CHAR},
-      ICON_URL = #{iconUrl,jdbcType=VARCHAR},
+  <update id="updateByPrimaryKey" parameterType="com.community.jian.community.model.Notification">
+    update NOTIFICATION
+    set SENDER = #{sender,jdbcType=BIGINT},
+      RECIPIENT = #{recipient,jdbcType=BIGINT},
+      TYPE = #{type,jdbcType=INTEGER},
+      AUTORID = #{autorid,jdbcType=BIGINT},
+      STATUS = #{status,jdbcType=INTEGER},
       GMT_CREATE = #{gmtCreate,jdbcType=BIGINT},
-      GMT_MODIFIED = #{gmtModified,jdbcType=BIGINT}
+      SENDER_NAME = #{senderName,jdbcType=VARCHAR},
+      AUTOR_TITLE = #{autorTitle,jdbcType=VARCHAR}
     where ID = #{id,jdbcType=BIGINT}
   </update>
-  <select id="selectByExampleWithRowbounds" parameterType="com.community.jian.community.model.UserExample" resultMap="BaseResultMap">
+  <select id="selectByExampleWithRowbounds" parameterType="com.community.jian.community.model.NotificationExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from USER
+    from NOTIFICATION
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
