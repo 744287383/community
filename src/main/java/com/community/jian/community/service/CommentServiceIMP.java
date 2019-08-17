@@ -64,7 +64,7 @@ public class CommentServiceIMP implements CommentService {
             questionEXTMapper.addCommentCount(Math.toIntExact(comment.getParentId()));
 
 
-            createNotification(comment, user, question, NotificationTypeEnum.REPLY_QUESTION);
+            createNotification(user, Long.valueOf(question.getCreator()), question, NotificationTypeEnum.REPLY_QUESTION);
 
         } else {
             //二级评论
@@ -78,28 +78,23 @@ public class CommentServiceIMP implements CommentService {
             commentMapper.insertSelective(comment);
             commentEXTMapper.addCommentCount(comment.getParentId());
 
-            createNotification(comment1, user, question, NotificationTypeEnum.REPLY_COMMENT);
+            createNotification(user,comment1.getCommentor(), question, NotificationTypeEnum.REPLY_COMMENT);
 
         }
 
     }
 
-    private void createNotification(Comment comment, User user, Question question, NotificationTypeEnum notificationTypeEnum) {
+    private void createNotification(User user,Long recipient, Question question, NotificationTypeEnum notificationTypeEnum) {
         Notification notification = new Notification();
-        notification.setSender(comment.getCommentor());
+        notification.setSender(user.getId());
         notification.setAutorid(question.getId());
         notification.setSenderName(user.getName());
         notification.setAutorTitle(question.getTitle());
         notification.setType(notificationTypeEnum.getType());
         notification.setStatus(NotificationStatusEum.UNREAD.getStatus());
         notification.setGmtCreate(System.currentTimeMillis());
+        notification.setRecipient(recipient);
 
-        if (comment.getType() == CommentTypeEnum.Comment_TYPE_FATHER.getType()) {
-            notification.setRecipient(Long.valueOf(question.getCreator()));
-        }
-        if (comment.getType() == CommentTypeEnum.Comment_TYPE_SON.getType()) {
-            notification.setRecipient(comment.getParentId());
-        }
 
         notificationMapper.insertSelective(notification);
     }

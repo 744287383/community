@@ -39,6 +39,7 @@ public class ProfileController {
             model.addAttribute("paginationDTO",paginationDTO);
         }
         if ("replies".equals(section)){
+            size=13;
             model.addAttribute("section", section);
             model.addAttribute("sectionName", "最新回复");
             PaginationDTO<NotificationDTO> paginationDTO= notificationService.listByRecipient(page,size,user.getId());

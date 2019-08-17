@@ -6,9 +6,13 @@
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="/css/navPublic.css">
+    <link rel="stylesheet" href="/css/editormd.preview.min.css">
     <script src="/js/jquery.js"></script>
     <script type="application/javascript" src="/js/bootstrap.min.js"></script>
     <script src="/js/handlebars-v4.1.2.js"></script>
+    <script src="/js/editormd.min.js"></script>
+    <script src="/js/lib/marked.min.js"></script>
+    <script src="/js/lib/prettify.min.js"></script>
     <link rel="stylesheet" href="/css/index.css">
 
     <script src="/js/community.js"></script>
@@ -56,7 +60,23 @@
                     th:text="${questionDTO.viewCount}"></span> 次浏览 | 发布时间：<span
                     th:text="${#dates.format(questionDTO.gmtCreate,'yyyy-MM-dd HH:mm')}"></span></span>
             <hr>
-            <span th:text="${questionDTO.description}"></span>
+                <div id="question-markdown-view">
+                    <!-- Server-side output Markdown text -->
+                    <textarea style="display:none;" th:text="${questionDTO.description}"></textarea>
+                </div>
+                <script type="text/javascript">
+                    $(function() {
+                        var testView = editormd.markdownToHTML("question-markdown-view", {
+                            // markdown : "[TOC]\n### Hello world!\n## Heading 2", // Also, you can dynamic set Markdown text
+                            // htmlDecode : true,  // Enable / disable HTML tag encode.
+                            // htmlDecode : "style,script,iframe",  // Note: If enabled, you should filter some dangerous HTML tags for website security.
+                            emoji:true,
+                            flowChart:true,
+                            sequenceDiagram:true,
+                            tex:true
+                        });
+                    });
+                </script>
                 <hr>
             <div >
                 <span  th:each="tag:${questionDTO.tags.split(',')}" class="tags-case"><span class="glyphicon glyphicon-tags" aria-hidden="true"></span> <span th:text="${tag}"></span></span>
@@ -136,7 +156,7 @@
                     <div class="media-left media-middle">
                         <a href="#">
                             <img class="media-object img-thumbnail img-rounded avatar_url"
-                                 th:src="${session.user}!=null?${session.user.iconUrl}:'/img/yk.png'" alt="...">
+                                 th:src="${session.user}!=null?${session.user.iconUrl}:'/images/yk.png'" alt="...">
                         </a>
                     </div>
                     <div class="media-body">
