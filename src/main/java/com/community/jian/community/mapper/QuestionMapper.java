@@ -5,9 +5,7 @@ import com.community.jian.community.model.QuestionExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
-import org.springframework.stereotype.Component;
 
-@Component
 public interface QuestionMapper {
     long countByExample(QuestionExample example);
 

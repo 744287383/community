@@ -1,0 +1,9 @@
+.form-box {
+	margin: 50px auto; width: 500px;
+}
+.ui-menu .ui-menu-item a.ui-state-focus {
+	border: 0px currentColor; border-image: none; color: rgb(255, 255, 255);
+}
+.ui-menu {
+	margin: 0px; padding: 0px;
+}

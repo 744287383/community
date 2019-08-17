@@ -10,3 +10,4 @@ $(".left").css("border-right","#efefef dashed 2px");
 }
 
 });
+

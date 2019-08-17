@@ -1,0 +1,69 @@
+.form-horizontal .has-feedback .form-control-feedback {
+	top: 0px;
+}
+input + label.error {
+	margin-top: 5px; margin-bottom: 0px;
+}
+i.form-control-feedback {
+	right: 15px; pointer-events: auto;
+}
+[disabled].form-control {
+	cursor: text; opacity: 1; background-color: rgb(255, 255, 255);
+}
+[readonly].form-control {
+	cursor: text; opacity: 1; background-color: rgb(255, 255, 255);
+}
+fieldset[disabled] .form-control {
+	cursor: text; opacity: 1; background-color: rgb(255, 255, 255);
+}
+div.form-group > label {
+	cursor: text;
+}
+label.error {
+	font-weight: 400; margin-top: 5px; cursor: text;
+}
+label.remember {
+	line-height: 20px; font-weight: 400; margin-top: 5px; display: inline-block !important;
+}
+label.accept {
+	line-height: 20px; font-weight: 400; display: block;
+}
+label.accept > span {
+	color: rgb(51, 51, 51); cursor: text;
+}
+label.control-label {
+	color: rgb(102, 102, 102);
+}
+.form-horizontal .control-label.accept {
+	text-align: left; padding-top: 0px;
+}
+#vemail {
+	left: 0px; top: 0px; position: absolute;
+}
+@media all and (min-width:768px)
+{
+i.form-control-feedback {
+	cursor: pointer !important;
+}
+.vinput {
+	margin-right: 5px; float: left;
+}
+input + label.error {
+	margin-top: 0px;
+}
+label.control-label {
+	padding-right: 0px;
+}
+.form-horizontal .control-label {
+	text-align: left;
+}
+.form-horizontal .has-feedback .form-control-feedback {
+	top: 0px;
+}
+.input-parent {
+	padding-left: 0px;
+}
+input[type=submit] {
+	
+}
+}

@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<HEAD>
+    <TITLE>码农社区</TITLE>
+    <META charset="utf-8">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+    <script src="/js/jquery.js"></script>
+    <script type="application/javascript" src="/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/css/navPublic.css">
+    <link rel="stylesheet" href="/css/index.css">
+    <script src="/js/community.js"></script>
+
+    <LINK href="/register/css/validator.css" rel="stylesheet">
+    <LINK
+            href="/register/css/magic-check.css" rel="stylesheet">
+    <LINK href="/register/css/index.css" rel="stylesheet">
+    <SCRIPT src="/register/js/jquery-validate.js" type="text/javascript"></SCRIPT>
+    <SCRIPT src="/register/js/validator.js" type="text/javascript"></SCRIPT>
+    <SCRIPT src="/register/js/index.js" type="text/javascript"></SCRIPT>
+
+</HEAD>
+<BODY>
+<div th:replace="nav::nav"></div>
+
+<div>
+<DIV class="container col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <DIV class="form-box row">
+        <FORM class="form-horizontal" id="register-form" role="form" action="#">
+
+            <DIV class="form-group"><LABEL class="col-sm-2  control-label" for="phone">手
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 机 :</LABEL>
+                <DIV class="col-sm-10  input-parent"><INPUT name="telephone" class="form-control vinput" id="phone"
+                                                            type="text" placeholder="请输入手机号" value=""><SPAN></SPAN>
+                </DIV>
+            </DIV>
+
+            <DIV class="form-group"><LABEL class="col-sm-2  control-label" for="username">昵
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 称 :</LABEL>
+                <DIV class="col-sm-10  input-parent"><INPUT name="username" class="form-control vinput" id="username"
+                                                            type="text" placeholder="请输入昵称" value=""><SPAN></SPAN>
+                </DIV>
+            </DIV>
+
+            <DIV class="form-group "><LABEL class="col-sm-2  control-label" for="email">个性签名 :</LABEL>
+                <DIV class="col-sm-10 input-parent"><INPUT name="email" class="form-control vinput" id="email" type="text" placeholder="请输入你的座右铭" value=""><SPAN></SPAN>
+                </DIV></DIV>
+
+            <DIV class="form-group "><LABEL class="col-sm-2  control-label" for="password">密
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 码 :</LABEL>
+                <DIV class="col-sm-10  input-parent"><INPUT name="password" class="form-control vinput" id="password"
+                                                            type="password" placeholder="请输入密码" value=""><I
+                        class="glyphicon glyphicon-eye-close form-control-feedback"
+                        id="toogle-password"></I><SPAN></SPAN></DIV>
+            </DIV>
+            <DIV class="form-group"><LABEL class="col-sm-2  control-label"
+                                           for="notpass">确认密码 :</LABEL>
+                <DIV class="col-sm-10  input-parent"><INPUT name="notpass" class="form-control vinput" id="notpass"
+                                                            type="text" placeholder="请再次输入密码" value=""><I
+                        class="glyphicon glyphicon-eye-close form-control-feedback"
+                        id="toggle-notpass"></I><SPAN></SPAN></DIV>
+            </DIV>
+            <BR>
+            <DIV class="form-group">
+                <DIV class="col-sm-12"><INPUT name="accept" class="magic-checkbox" id="accept"
+                                              type="checkbox"> <LABEL class="accept" for="accept"><SPAN>我已阅读并接受</SPAN>
+                    <A
+                            href="javascript:;">《版权声明》</A> <SPAN>和</SPAN> <A
+                            href="javascript:;">《隐私保护》</A></LABEL></DIV>
+            </DIV>
+            <DIV class="form-group">
+                <DIV
+                        class="col-sm-12"><INPUT class="btn btn-primary form-control btn-success" id="submit" type="submit"
+                                                 value="注册">
+                </DIV>
+            </DIV>
+        </FORM>
+    </DIV>
+</DIV>
+<FOOTER></FOOTER>
+</div>
+</BODY>
+</html>

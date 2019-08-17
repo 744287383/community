@@ -17,6 +17,10 @@ public class User {
 
     private Long gmtModified;
 
+    private String password;
+
+    private String phoneNum;
+
     public Long getId() {
         return id;
     }
@@ -81,6 +85,22 @@ public class User {
         this.gmtModified = gmtModified;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password == null ? null : password.trim();
+    }
+
+    public String getPhoneNum() {
+        return phoneNum;
+    }
+
+    public void setPhoneNum(String phoneNum) {
+        this.phoneNum = phoneNum == null ? null : phoneNum.trim();
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -95,6 +115,8 @@ public class User {
         sb.append(", iconUrl=").append(iconUrl);
         sb.append(", gmtCreate=").append(gmtCreate);
         sb.append(", gmtModified=").append(gmtModified);
+        sb.append(", password=").append(password);
+        sb.append(", phoneNum=").append(phoneNum);
         sb.append("]");
         return sb.toString();
     }

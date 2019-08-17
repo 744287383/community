@@ -10,6 +10,8 @@
     <result column="ICON_URL" jdbcType="VARCHAR" property="iconUrl" />
     <result column="GMT_CREATE" jdbcType="BIGINT" property="gmtCreate" />
     <result column="GMT_MODIFIED" jdbcType="BIGINT" property="gmtModified" />
+    <result column="PASSWORD" jdbcType="VARCHAR" property="password" />
+    <result column="PHONE_NUM" jdbcType="CHAR" property="phoneNum" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -70,7 +72,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    ID, ACCOUNT_ID, NAME, BIO, TOKEN, ICON_URL, GMT_CREATE, GMT_MODIFIED
+    ID, ACCOUNT_ID, NAME, BIO, TOKEN, ICON_URL, GMT_CREATE, GMT_MODIFIED, PASSWORD, PHONE_NUM
   </sql>
   <select id="selectByExample" parameterType="com.community.jian.community.model.UserExample" resultMap="BaseResultMap">
     select
@@ -105,10 +107,12 @@
   <insert id="insert" parameterType="com.community.jian.community.model.User">
     insert into USER (ID, ACCOUNT_ID, NAME, 
       BIO, TOKEN, ICON_URL, GMT_CREATE, 
-      GMT_MODIFIED)
+      GMT_MODIFIED, PASSWORD, PHONE_NUM
+      )
     values (#{id,jdbcType=BIGINT}, #{accountId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
       #{bio,jdbcType=VARCHAR}, #{token,jdbcType=CHAR}, #{iconUrl,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=BIGINT}, 
-      #{gmtModified,jdbcType=BIGINT})
+      #{gmtModified,jdbcType=BIGINT}, #{password,jdbcType=VARCHAR}, #{phoneNum,jdbcType=CHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.community.jian.community.model.User">
     insert into USER
@@ -137,6 +141,12 @@
       <if test="gmtModified != null">
         GMT_MODIFIED,
       </if>
+      <if test="password != null">
+        PASSWORD,
+      </if>
+      <if test="phoneNum != null">
+        PHONE_NUM,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -162,6 +172,12 @@
       </if>
       <if test="gmtModified != null">
         #{gmtModified,jdbcType=BIGINT},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNum != null">
+        #{phoneNum,jdbcType=CHAR},
       </if>
     </trim>
   </insert>
@@ -198,6 +214,12 @@
       <if test="record.gmtModified != null">
         GMT_MODIFIED = #{record.gmtModified,jdbcType=BIGINT},
       </if>
+      <if test="record.password != null">
+        PASSWORD = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phoneNum != null">
+        PHONE_NUM = #{record.phoneNum,jdbcType=CHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -212,7 +234,9 @@
       TOKEN = #{record.token,jdbcType=CHAR},
       ICON_URL = #{record.iconUrl,jdbcType=VARCHAR},
       GMT_CREATE = #{record.gmtCreate,jdbcType=BIGINT},
-      GMT_MODIFIED = #{record.gmtModified,jdbcType=BIGINT}
+      GMT_MODIFIED = #{record.gmtModified,jdbcType=BIGINT},
+      PASSWORD = #{record.password,jdbcType=VARCHAR},
+      PHONE_NUM = #{record.phoneNum,jdbcType=CHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -241,6 +265,12 @@
       <if test="gmtModified != null">
         GMT_MODIFIED = #{gmtModified,jdbcType=BIGINT},
       </if>
+      <if test="password != null">
+        PASSWORD = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNum != null">
+        PHONE_NUM = #{phoneNum,jdbcType=CHAR},
+      </if>
     </set>
     where ID = #{id,jdbcType=BIGINT}
   </update>
@@ -252,7 +282,9 @@
       TOKEN = #{token,jdbcType=CHAR},
       ICON_URL = #{iconUrl,jdbcType=VARCHAR},
       GMT_CREATE = #{gmtCreate,jdbcType=BIGINT},
-      GMT_MODIFIED = #{gmtModified,jdbcType=BIGINT}
+      GMT_MODIFIED = #{gmtModified,jdbcType=BIGINT},
+      PASSWORD = #{password,jdbcType=VARCHAR},
+      PHONE_NUM = #{phoneNum,jdbcType=CHAR}
     where ID = #{id,jdbcType=BIGINT}
   </update>
   <select id="selectByExampleWithRowbounds" parameterType="com.community.jian.community.model.UserExample" resultMap="BaseResultMap">

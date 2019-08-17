@@ -2,13 +2,20 @@ package com.community.jian.community.Controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class UserController {
-    @GetMapping("/nini")
-    public String  getUsers(){
+    @GetMapping("/register")
+    public String  register(){
 
-        return "test";
+        return "register";
+    }
+    @PostMapping("/register")
+    public String toRegister(){
+
+
+        return "redirect:/";
     }
 
 }
