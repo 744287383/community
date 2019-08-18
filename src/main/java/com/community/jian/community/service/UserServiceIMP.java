@@ -1,5 +1,9 @@
 package com.community.jian.community.service;
 
+import com.community.jian.community.dto.UserDTO;
+import com.community.jian.community.exception.LocalUserLoginException;
+import com.community.jian.community.exception.ServiceException;
+import com.community.jian.community.exception.UserErrorMessage;
 import com.community.jian.community.mapper.UserMapper;
 import com.community.jian.community.model.User;
 import com.community.jian.community.model.UserExample;
@@ -8,7 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.swing.text.DefaultEditorKit;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -43,11 +49,9 @@ public class UserServiceIMP implements UserService {
     }
 
     @Override
-    @Transactional
     public int updateUser(User user) {
         UserExample userExample = new UserExample();
-        userExample.createCriteria()
-                .andAccountIdEqualTo(user.getAccountId());
+        userExample.or().andPhoneNumEqualTo(user.getPhoneNum());
         return userMapper.updateByExample(user, userExample);
     }
 
@@ -95,5 +99,56 @@ public class UserServiceIMP implements UserService {
             return users.size() > 0 ? users.get(0) : null;
         }
 
+    }
+
+    @Override
+    public boolean validateOnlyPhoneNum(String phoneNum) {
+        UserExample example = new UserExample();
+        example.or().andPhoneNumEqualTo(phoneNum);
+        List<User> users = userMapper.selectByExample(example);
+        if (users!=null&&users.size()==0){
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public User registerUser(UserDTO userDTO) {
+        User user=new User();
+        BeanUtils.copyProperties(userDTO,user);
+        user.setToken(UUID.randomUUID().toString());
+        user.setIconUrl("/images/register.jpg");
+        user.setGmtCreate(System.currentTimeMillis());
+        user.setGmtModified(System.currentTimeMillis());
+        userMapper.insertSelective(user);
+        UserExample example = new UserExample();
+        example.or().andPhoneNumEqualTo(user.getPhoneNum());
+        List<User> users = userMapper.selectByExample(example);
+        if (users!=null&&users.size()==1){
+            return users.get(0);
+        }else {
+            return null;
+        }
+
+
+    }
+
+    @Override
+    public int updateGithubUser(User user) {
+        UserExample userExample = new UserExample();
+        userExample.createCriteria()
+                .andAccountIdEqualTo(user.getAccountId());
+        return userMapper.updateByExample(user, userExample);
+    }
+
+    @Override
+    public User FindUSerByPhoneNum(String phoneNum) {
+        UserExample example = new UserExample();
+        example.or().andPhoneNumEqualTo(phoneNum);
+        List<User> users = userMapper.selectByExample(example);
+        if (users!=null&&users.size()==1){
+            return users.get(0);
+        }
+        return null;
     }
 }

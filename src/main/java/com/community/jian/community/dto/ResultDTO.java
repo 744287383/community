@@ -2,6 +2,7 @@ package com.community.jian.community.dto;
 
 import com.community.jian.community.exception.CommentException;
 import com.community.jian.community.exception.ICutomizeMessage;
+import com.community.jian.community.exception.LocalUserLoginException;
 import lombok.Data;
 
 @Data
@@ -44,6 +45,11 @@ public static ResultDTO errorOf(Integer code,String message){
         resultDTO.setMessage(e.getMessage());
         return resultDTO;
     }
-
+    public static ResultDTO errorOf(LocalUserLoginException e) {
+        ResultDTO resultDTO=new ResultDTO();
+        resultDTO.setCode(e.getCode());
+        resultDTO.setMessage(e.getMessage());
+        return resultDTO;
+    }
 
 }

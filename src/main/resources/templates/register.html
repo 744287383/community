@@ -26,24 +26,24 @@
 <div>
 <DIV class="container col-lg-12 col-md-12 col-sm-12 col-xs-12">
     <DIV class="form-box row">
-        <FORM class="form-horizontal" id="register-form" role="form" action="#">
+        <FORM class="form-horizontal" id="register-form" role="form" action="/register" method="post">
 
             <DIV class="form-group"><LABEL class="col-sm-2  control-label" for="phone">手
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 机 :</LABEL>
-                <DIV class="col-sm-10  input-parent"><INPUT name="telephone" class="form-control vinput" id="phone"
+                <DIV class="col-sm-10  input-parent"><INPUT name="phoneNum" class="form-control vinput" id="phone"
                                                             type="text" placeholder="请输入手机号" value=""><SPAN></SPAN>
                 </DIV>
             </DIV>
 
             <DIV class="form-group"><LABEL class="col-sm-2  control-label" for="username">昵
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 称 :</LABEL>
-                <DIV class="col-sm-10  input-parent"><INPUT name="username" class="form-control vinput" id="username"
+                <DIV class="col-sm-10  input-parent"><INPUT name="name" class="form-control vinput" id="username"
                                                             type="text" placeholder="请输入昵称" value=""><SPAN></SPAN>
                 </DIV>
             </DIV>
 
             <DIV class="form-group "><LABEL class="col-sm-2  control-label" for="email">个性签名 :</LABEL>
-                <DIV class="col-sm-10 input-parent"><INPUT name="email" class="form-control vinput" id="email" type="text" placeholder="请输入你的座右铭" value=""><SPAN></SPAN>
+                <DIV class="col-sm-10 input-parent"><INPUT name="bio" class="form-control vinput" id="email" type="text" placeholder="请输入你的座右铭" value=""><SPAN></SPAN>
                 </DIV></DIV>
 
             <DIV class="form-group "><LABEL class="col-sm-2  control-label" for="password">密
@@ -71,7 +71,7 @@
             <DIV class="form-group">
                 <DIV
                         class="col-sm-12"><INPUT class="btn btn-primary form-control btn-success" id="submit" type="submit"
-                                                 value="注册">
+                                                 value="注册并登录">
                 </DIV>
             </DIV>
         </FORM>

@@ -3,9 +3,13 @@ package com.community.jian.community.mapper;
 import com.community.jian.community.model.Comment;
 import com.community.jian.community.model.CommentExample;
 import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
+import org.springframework.stereotype.Component;
 
+@Component
 public interface CommentMapper {
     long countByExample(CommentExample example);
 

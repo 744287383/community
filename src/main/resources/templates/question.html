@@ -17,10 +17,7 @@
 
     <script src="/js/community.js"></script>
     <link rel="stylesheet" href="/css/question.css">
-    <script th:inline="javascript">
-        var client_id=[[${pioneer.client_id}]];
-        var redirectUrl=[[${'http://'+#request.getServerName()+'/fallback'}]];
-    </script>
+
     <script id="reply-template" type="text/x-handlebars-template">
         <div class=" media comment-reply comment-reply-underLine">
             <div class="media-left ">

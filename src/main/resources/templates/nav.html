@@ -56,7 +56,10 @@
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
-
+    <script th:inline="javascript">
+        var client_id=[[${pioneer.client_id}]];
+        var redirectUrl=[[${'http://'+#request.getServerName()+'/fallback'}]];
+    </script>
     <!--modelframe-->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
         <div class="modal-dialog" role="document">
@@ -77,15 +80,17 @@
                         <a href="#" style="text-align:right;display: block; margin-top: 5px;"><p>忘记了密码?</p></a>
                         </div>
                     <div class="form-group" style="text-align: center;">
-                    <a th:href="'https://github.com/login/oauth/authorize?client_id='+${pioneer.client_id}+'&redirect_uri='+${#request.getScheme()}+'://'+${#request.getServerName()}+'/fallback&scope=user&state=1'" style="width: auto;display:inline-block;margin-left: auto;margin-right: auto;"><img src="/images/github.png" style="height: 20px;">github
-                    </a>
+<!--                    <a th:href="'https://github.com/login/oauth/authorize?client_id='+${pioneer.client_id}+'&redirect_uri='+${#request.getScheme()}+'://'+${#request.getServerName()}+'/fallback&scope=user&state=1'" style="width: auto;display:inline-block;margin-left: auto;margin-right: auto;"><img src="/images/github.png" style="height: 20px;">github-->
+<!--                    </a>-->
+                        <a onclick="toGithubLogin()" style="width: auto;display:inline-block;margin-left: auto;margin-right: auto;"><img src="/images/github.png" style="height: 20px;">github
+                        </a>
                     </div>
                 </div>
 
                 <div class="modal-footer">
-                    <span style="float: left;" id="tips"></span>
+                    <span style="float: left;color: red;" id="message"> </span>
                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                    <button type="button" class="btn btn-success">登录</button>
+                    <button type="button" class="btn btn-success" onclick="localUserLogin()">登录</button>
                 </div>
             </div>
         </div>

@@ -37,7 +37,11 @@ public class IndexController {
                          HttpServletResponse response){
         User user = (User) request.getSession().getAttribute("user");
         user.setToken(null);
-        userService.updateUser(user);
+        if (user.getAccountId()!=null){
+            userService.updateGithubUser(user);
+        }else {
+            userService.updateUser(user);
+        }
         request.getSession().setAttribute("user",null);
         Cookie cookie=new Cookie("token",null);
 

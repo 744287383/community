@@ -22,6 +22,7 @@ function addTwoComment(e) {
 
 
 function post(parentId,content,type) {
+
     if (content==null||content.trim().length==0){
         alert("回复的内容不能为空！");
         return;
@@ -45,8 +46,9 @@ function post(parentId,content,type) {
 
                     var isLogin = confirm(res.message);
                     if (isLogin){
-                        localStorage.setItem("login","login");
-                        window.open('https://github.com/login/oauth/authorize?client_id='+client_id+'&redirect_uri='+redirectUrl+'&scope=user&state=1');
+                        $("#exampleModal").modal('show');
+                        // localStorage.setItem("login","login");
+                        // window.open('https://github.com/login/oauth/authorize?client_id='+client_id+'&redirect_uri='+redirectUrl+'&scope=user&state=1');
                     }
 
                 }else {
