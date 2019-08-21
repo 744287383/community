@@ -15,7 +15,7 @@ public class UserDTO {
     @Size(min = 2,max = 100,message = "请输入不少于2个字符的昵称")
     private String name;
     @NotBlank(message = "个性签名不能为空")
-    @Size(min = 6,max = 20,message = "请输入6到20为的字符密码")
+    @Size(min = 6,max = 20,message = "请输入不小于4位字符的个性签名")
     private String bio;
 
     private String token;

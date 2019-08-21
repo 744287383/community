@@ -5,7 +5,9 @@ import com.community.jian.community.model.User;
 import com.community.jian.community.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,8 +22,9 @@ public class UserController {
     @Autowired
     private UserService userService;
     @GetMapping("/register")
-    public String  register(UserDTO userDTO){
-
+    public String  register(UserDTO userDTO,Model model){
+        userDTO=new UserDTO();
+        model.addAttribute("userDTO",userDTO);
         return "register";
     }
     @PostMapping("/register")
@@ -30,11 +33,11 @@ public class UserController {
                              HttpServletResponse response){
 
         if (bindingResult.hasErrors()){
-            System.out.println("字段错误"+userDTO.toString());
         return "register";
         }
       boolean onlyPhone = userService.validateOnlyPhoneNum(userDTO.getPhoneNum());
         if (!onlyPhone){
+
             bindingResult.rejectValue("phoneNum","该号码已经被注册！","该号码已经被注册！");
             return "register";
         }

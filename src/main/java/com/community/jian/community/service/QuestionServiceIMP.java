@@ -1,5 +1,6 @@
 package com.community.jian.community.service;
 
+import ch.qos.logback.core.net.SyslogOutputStream;
 import com.community.jian.community.dto.PaginationDTO;
 import com.community.jian.community.dto.QuestionDTO;
 import com.community.jian.community.exception.QuestionErrorMessage;
@@ -10,6 +11,7 @@ import com.community.jian.community.mapper.UserMapper;
 import com.community.jian.community.model.Question;
 import com.community.jian.community.model.QuestionExample;
 import com.community.jian.community.model.User;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.RowBounds;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.BeanUtils;
@@ -45,10 +47,7 @@ public class QuestionServiceIMP implements QuestionService{
         questionExample.setOrderByClause("id desc");
         List<Question> questions=questionMapper.selectByExampleWithRowbounds(questionExample,new RowBounds(offset,paginationDTO.getSize()));
         List<QuestionDTO> questionDTOs = getQuestionDTOS(questions);
-
         paginationDTO.setData(questionDTOs);
-
-
         return paginationDTO;
     }
 
@@ -117,7 +116,8 @@ public class QuestionServiceIMP implements QuestionService{
 
     @Override
     public List<QuestionDTO> getRelateQuestion(Long id,String tags) {
-        String s = tags.replaceAll(",", "|");
+        tags=toConversion(tags);
+        String s = tags.replace(",", "|");
 
         List<Question> questions = questionEXTMapper.getRelateQuestion(id,s);
         if (questions==null||questions.size()<=0){
@@ -129,6 +129,18 @@ public class QuestionServiceIMP implements QuestionService{
             return questionDTO1;
         }).collect(Collectors.toList());
         return collect;
+    }
+
+    private String toConversion(String tags) {
+        String[] conversion_char={"\\","$", "(", ")", "*", "+", ".", "[", "]", "?",  "^", "{", "}", "|"};
+        if (StringUtils.isNoneBlank(tags)){
+            for (String conversion:conversion_char){
+                if (tags.contains(conversion)){
+                    return tags.replace(conversion, "\\" + conversion);//编译器会把\\转成\;
+                }
+            }
+        }
+        return tags;
     }
 
     @NotNull//把question的list转换成questionDTO的list
