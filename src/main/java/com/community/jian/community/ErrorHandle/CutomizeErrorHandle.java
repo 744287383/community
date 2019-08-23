@@ -2,10 +2,8 @@ package com.community.jian.community.ErrorHandle;
 
 import com.community.jian.community.dto.Pioneer;
 import com.community.jian.community.dto.ResultDTO;
-import com.community.jian.community.exception.ApplicationErrorMessage;
-import com.community.jian.community.exception.CommentException;
-import com.community.jian.community.exception.LocalUserLoginException;
-import com.community.jian.community.exception.ServiceException;
+import com.community.jian.community.dto.UploadImgDTO;
+import com.community.jian.community.exception.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.ui.Model;
@@ -34,6 +32,13 @@ public class CutomizeErrorHandle extends ResponseEntityExceptionHandler {
         e.printStackTrace();
 
         return ResultDTO.errorOf(e);
+    }
+    @ExceptionHandler(UploadImgException.class)
+    @ResponseBody
+    UploadImgDTO UploadImgHandeException(HttpServletRequest request, UploadImgException e, Model model) {
+
+
+        return UploadImgDTO.errorOf(e);
     }
 
     @ExceptionHandler(ServiceException.class)
