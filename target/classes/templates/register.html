@@ -24,70 +24,95 @@
 <div th:replace="nav::nav"></div>
 
 <div>
-<DIV class="container col-lg-12 col-md-12 col-sm-12 col-xs-12">
-    <DIV class="form-box row">
-        <FORM class="form-horizontal" id="register-form" role="form" action="/register" method="post">
+    <DIV class="container col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <DIV class="form-box row">
+            <FORM class="form-horizontal" id="register-form" role="form" action="/register" method="post">
 
-            <DIV class="form-group" th:classappend="${#fields.hasErrors('userDTO.phoneNum')?'has-error has-feedback':''}"><LABEL class="col-sm-2  control-label" for="phone">手
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 机 :</LABEL>
-                <DIV class="col-sm-10  input-parent">
-                    <INPUT name="phoneNum" class="form-control vinput" id="phone" type="text" placeholder="请输入手机号" th:value="${userDTO.phoneNum}">
-                    <label id="phone-error" class="error control-label" for="phone" th:if="${#fields.hasErrors('userDTO.phoneNum')}"><span th:errors="${userDTO.phoneNum}"></span></label>
-                    <SPAN th:classappend="${#fields.hasErrors('userDTO.phoneNum')?'glyphicon-exclamation-sign glyphicon form-control-feedback':''}"></SPAN>
+                <DIV class="form-group"
+                     th:classappend="${#fields.hasErrors('userDTO.phoneNum')?'has-error has-feedback':''}"><LABEL
+                        class="col-sm-2  control-label" for="phone">手
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 机 :</LABEL>
+                    <DIV class="col-sm-10  input-parent">
+                        <INPUT name="phoneNum" class="form-control vinput" id="phone" type="text" placeholder="请输入手机号"
+                               th:value="${userDTO.phoneNum}">
+                        <label id="phone-error" class="error control-label" for="phone"
+                               th:if="${#fields.hasErrors('userDTO.phoneNum')}"><span
+                                th:errors="${userDTO.phoneNum}"></span></label>
+                        <SPAN th:classappend="${#fields.hasErrors('userDTO.phoneNum')?'glyphicon-exclamation-sign glyphicon form-control-feedback':''}"></SPAN>
+                    </DIV>
+
                 </DIV>
 
-            </DIV>
-
-            <DIV class="form-group" th:classappend="${#fields.hasErrors('userDTO.name')?'has-error has-feedback':''}"><LABEL class="col-sm-2  control-label" for="username">昵
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 称 :</LABEL>
-                <DIV class="col-sm-10  input-parent"><INPUT name="name" class="form-control vinput" id="username"
-                                                            type="text" placeholder="请输入昵称" th:value="${userDTO.name}">
-                    <label id="username-error" class="error control-label" for="username" th:if="${#fields.hasErrors('userDTO.name')}"><span th:errors="${userDTO.name}"></span></label>
-                    <SPAN th:classappend="${#fields.hasErrors('userDTO.name')?'glyphicon-exclamation-sign glyphicon form-control-feedback':''}"></SPAN>
+                <DIV class="form-group"
+                     th:classappend="${#fields.hasErrors('userDTO.name')?'has-error has-feedback':''}">
+                    <LABEL class="col-sm-2  control-label" for="name">昵&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 称 :</LABEL>
+                    <DIV class="col-sm-10  input-parent">
+                        <INPUT name="name" class="form-control vinput" id="name"
+                               type="text" placeholder="请输入昵称" th:value="${userDTO.name}">
+                        <label id="username-error" class="error control-label" for="name"
+                               th:if="${#fields.hasErrors('userDTO.name')}"><span
+                                th:errors="${userDTO.name}"></span></label>
+                        <SPAN th:classappend="${#fields.hasErrors('userDTO.name')?'glyphicon-exclamation-sign glyphicon form-control-feedback':''}"></SPAN>
+                    </DIV>
                 </DIV>
-            </DIV>
 
-            <DIV class="form-group" th:classappend="${#fields.hasErrors('userDTO.bio')?'has-error has-feedback':''}"><LABEL class="col-sm-2  control-label" for="email">个性签名 :</LABEL>
-                <DIV class="col-sm-10 input-parent"><INPUT name="bio" class="form-control vinput" id="email" type="text" placeholder="请输入你的座右铭" th:value="${userDTO.bio}">
-                    <label id="email-error" class="error control-label" for="email" th:if="${#fields.hasErrors('userDTO.bio')}"><span th:errors="${userDTO.bio}"></span></label>
-                    <SPAN th:classappend="${#fields.hasErrors('userDTO.bio')?'glyphicon-exclamation-sign glyphicon form-control-feedback':''}"></SPAN>
-                </DIV></DIV>
+                <DIV class="form-group"
+                     th:classappend="${#fields.hasErrors('userDTO.bio')?'has-error has-feedback':''}">
+                    <LABEL class="col-sm-2  control-label" for="bio">个性签名 :</LABEL>
+                    <DIV class="col-sm-10 input-parent">
+                        <INPUT name="bio" class="form-control vinput" id="bio" type="text" placeholder="请输入你的座右铭"
+                               th:value="${userDTO.bio}">
+                        <label id="email-error" class="error control-label" for="bio"
+                               th:if="${#fields.hasErrors('userDTO.bio')}"><span
+                                th:errors="${userDTO.bio}"></span></label>
+                        <SPAN th:classappend="${#fields.hasErrors('userDTO.bio')?'glyphicon-exclamation-sign glyphicon form-control-feedback':''}"></SPAN>
+                    </DIV>
+                </DIV>
 
-            <DIV class="form-group" th:classappend="${#fields.hasErrors('userDTO.password')?'has-error has-feedback':''}"><LABEL class="col-sm-2  control-label" for="password">密
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 码 :</LABEL>
-                <DIV class="col-sm-10  input-parent"><INPUT name="password" class="form-control vinput" id="password"
-                                                            type="password" placeholder="请输入密码" th:value="${userDTO.password}">
-                    <label id="password-error" class="error control-label" for="password" th:if="${#fields.hasErrors('userDTO.password')}"><span th:errors="${userDTO.password}"></span></label>
-                    <I class="glyphicon glyphicon-eye-close form-control-feedback"
-                        id="toogle-password"></I>
-                    <SPAN th:classappend="${#fields.hasErrors('userDTO.password')?'glyphicon-exclamation-sign glyphicon form-control-feedback':''}"></SPAN>
+                <DIV class="form-group"
+                     th:classappend="${#fields.hasErrors('userDTO.password')?'has-error has-feedback':''}"><LABEL
+                        class="col-sm-2  control-label" for="password">密
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 码 :</LABEL>
+                    <DIV class="col-sm-10  input-parent"><INPUT name="password" class="form-control vinput"
+                                                                id="password"
+                                                                type="password" placeholder="请输入密码"
+                                                                th:value="${userDTO.password}">
+                        <label id="password-error" class="error control-label" for="password"
+                               th:if="${#fields.hasErrors('userDTO.password')}"><span
+                                th:errors="${userDTO.password}"></span></label>
+                        <I class="glyphicon glyphicon-eye-close form-control-feedback"
+                           id="toogle-password"></I>
+                        <SPAN th:classappend="${#fields.hasErrors('userDTO.password')?'glyphicon-exclamation-sign glyphicon form-control-feedback':''}"></SPAN>
+                    </DIV>
                 </DIV>
-            </DIV>
-            <DIV class="form-group"><LABEL class="col-sm-2  control-label"
-                                           for="notpass">确认密码 :</LABEL>
-                <DIV class="col-sm-10  input-parent"><INPUT name="notpass" class="form-control vinput" id="notpass"
-                                                            type="password" placeholder="请再次输入密码" th:value="${userDTO.password}"><I
-                        class="glyphicon glyphicon-eye-close form-control-feedback"
-                        id="toggle-notpass"></I><SPAN></SPAN></DIV>
-            </DIV>
-            <BR>
-            <DIV class="form-group">
-                <DIV class="col-sm-12"><INPUT name="accept" class="magic-checkbox" id="accept"
-                                              type="checkbox"> <LABEL class="accept" for="accept"><SPAN>我已阅读并接受</SPAN>
-                    <A
-                            href="javascript:;">《版权声明》</A> <SPAN>和</SPAN> <A
-                            href="javascript:;">《隐私保护》</A></LABEL></DIV>
-            </DIV>
-            <DIV class="form-group">
-                <DIV
-                        class="col-sm-12"><INPUT class="btn btn-primary form-control btn-success" id="submit" type="submit"
-                                                 value="注册并登录">
+                <DIV class="form-group"><LABEL class="col-sm-2  control-label"
+                                               for="notpass">确认密码 :</LABEL>
+                    <DIV class="col-sm-10  input-parent"><INPUT name="notpass" class="form-control vinput" id="notpass"
+                                                                type="password" placeholder="请再次输入密码"
+                                                                th:value="${userDTO.password}"><I
+                            class="glyphicon glyphicon-eye-close form-control-feedback"
+                            id="toggle-notpass"></I><SPAN></SPAN></DIV>
                 </DIV>
-            </DIV>
-        </FORM>
+                <BR>
+                <DIV class="form-group">
+                    <DIV class="col-sm-12"><INPUT name="accept" class="magic-checkbox" id="accept"
+                                                  type="checkbox"> <LABEL class="accept"
+                                                                          for="accept"><SPAN>我已阅读并接受</SPAN>
+                        <A
+                                href="javascript:;">《版权声明》</A> <SPAN>和</SPAN> <A
+                                href="javascript:;">《隐私保护》</A></LABEL></DIV>
+                </DIV>
+                <DIV class="form-group">
+                    <DIV
+                            class="col-sm-12"><INPUT class="btn btn-primary form-control btn-success" id="submit"
+                                                     type="submit"
+                                                     value="注册并登录">
+                    </DIV>
+                </DIV>
+            </FORM>
+        </DIV>
     </DIV>
-</DIV>
-<FOOTER></FOOTER>
+    <FOOTER></FOOTER>
 </div>
 </BODY>
 </html>

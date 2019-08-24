@@ -3,17 +3,23 @@ $(function () {
         highlight: function (element, errorClass) {
             $(element).parents('.form-group').removeClass('has-success has-feedback');
             $(element).parents('.form-group').addClass('has-error has-feedback');
+
             if ($(element).parents('.form-group').find("span:empty").prev().prop('tagName') != 'I') {
+
                 $(element).parents('.form-group').find("span:empty").removeClass('glyphicon glyphicon-ok form-control-feedback');
                 $(element).parents('.form-group').find("span:empty").addClass('glyphicon glyphicon-exclamation-sign form-control-feedback');
+
             } else if ($(element).parents('.form-group').find("span:empty").prev().prop('tagName') == 'I') {
+
                 $(element).parents('.form-group').find("i").show();
                 $(element).parents('.form-group').find("span:empty").hide();
+
             }
             setTimeout(function () {
                 $(element).parent().find("label").addClass('control-label');
             }, 0);
-        }, unhighlight: function (element, errorClass) {
+        },
+        unhighlight: function (element, errorClass) {
             $(element).parents('.form-group').removeClass('has-error has-feedback');
             $(element).parents('.form-group').addClass('has-success has-feedback');
             if ($(element).parents('.form-group').find("span:empty").prev().prop('tagName') != 'I') {

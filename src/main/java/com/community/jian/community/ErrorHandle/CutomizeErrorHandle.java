@@ -56,6 +56,9 @@ public class CutomizeErrorHandle extends ResponseEntityExceptionHandler {
     @ExceptionHandler(Exception.class)
     ModelAndView handleControllerException(HttpServletRequest request, Throwable e, Model model) {
         e.printStackTrace();
+        Pioneer pioneer = new Pioneer();
+        pioneer.setClient_id(client_id);
+        model.addAttribute("pioneer",pioneer);
         model.addAttribute("message", ApplicationErrorMessage.SERVICE_HOT.getMessage());
         return new ModelAndView("error");
     }

@@ -10,8 +10,6 @@ import java.util.List;
 public interface QuestionService {
     int insertQuestion(Question question);
 
-    PaginationDTO list(Integer page, Integer size);
-
     PaginationDTO listById(Integer page, Integer size,Integer id);
     QuestionDTO getQuestionDTOById(Integer id);
 
@@ -22,4 +20,6 @@ public interface QuestionService {
     void addViewCount(Integer id);
 
     List<QuestionDTO> getRelateQuestion(Long id,String tags);
+
+    PaginationDTO list(String search, Integer page, Integer size);
 }

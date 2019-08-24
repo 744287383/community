@@ -37,4 +37,24 @@
   <select id="getRelateQuestion" resultType="Question">
     select ID,TITLE from QUESTION where id !=#{id} and tags regexp #{tags} order by gmt_create desc limit 20
   </select>
+
+  <select id="countSearchQuestion" parameterType="java.lang.String" resultType="java.lang.Integer">
+    select count (1) from QUESTION
+    <where>
+      <if test="search!=null">
+        and title regexp #{search}
+      </if>
+    </where>
+  </select>
+
+  <select id="getSearchQuestion" resultMap="BaseResultMap">
+    select * from QUESTION
+    <where>
+      <if test="search!=null">
+      and  title regexp #{search}
+      </if>
+    </where>
+    order by id desc limit #{offset},#{size}
+  </select>
+
 </mapper>

@@ -6,6 +6,7 @@ import com.community.jian.community.model.User;
 import com.community.jian.community.service.QuestionService;
 import com.community.jian.community.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,9 +27,12 @@ public class IndexController {
     public String index(Model model,
                         HttpServletRequest request,
                         @RequestParam(name = "page",defaultValue = "1") Integer page,
-                        @RequestParam(name = "size",defaultValue = "7") Integer size) throws Exception {
-        PaginationDTO paginationDTO = questionService.list(page, size);
+                        @RequestParam(name = "size",defaultValue = "7") Integer size,
+                        @RequestParam(name="search",required = false)String search) throws Exception {
+
+        PaginationDTO paginationDTO = questionService.list(search,page, size);
         model.addAttribute("paginationDTO",paginationDTO);
+        model.addAttribute("search",search);
         return "index";
     }
 

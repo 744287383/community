@@ -14,7 +14,8 @@
     <result column="TO_ID" jdbcType="BIGINT" property="toId" />
   </resultMap>
 
-<update id="addCommentCount" parameterType="Long">
+<update id="addCommentCount" parameterType="java.lang.Long">
 update COMMENT set COMMENT_COUNT=COMMENT_COUNT+1 where id=#{id}
 </update>
+
 </mapper>

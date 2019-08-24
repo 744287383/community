@@ -1,6 +1,8 @@
 package com.community.jian.community.Controller;
 
+import com.community.jian.community.dto.Pioneer;
 import com.community.jian.community.exception.ApplicationErrorMessage;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -14,6 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 @RequestMapping("/error")
 public class CutomizeController implements ErrorController {
 
+    @Value("${github.client.client_id}")
+    private String client_id;
 
     @Override
     public String getErrorPath() {
@@ -26,7 +30,10 @@ public class CutomizeController implements ErrorController {
         HttpStatus status = this.getStatus(request);
 
         ModelAndView modelAndView = new ModelAndView("error");
-        if (status.is4xxClientError()){
+        Pioneer pioneer = new Pioneer();
+        pioneer.setClient_id(client_id);
+        modelAndView.addObject("pioneer",pioneer);
+            if (status.is4xxClientError()){
             modelAndView.addObject("message", ApplicationErrorMessage.REQUEST_ERROR.getMessage());
         }
         if (status.is5xxServerError()){

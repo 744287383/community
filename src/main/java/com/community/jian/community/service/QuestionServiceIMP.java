@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -39,13 +40,17 @@ public class QuestionServiceIMP implements QuestionService{
 
     @Override
     //获取首页问题列表
-    public PaginationDTO list(Integer page, Integer size) {
+    public PaginationDTO list(String search,Integer page, Integer size) {
+        if (StringUtils.isNoneBlank(search)){
+            search=search.trim();
+            search=toConversion(search);
+            String[] s = StringUtils.split(search," ");
+            search = Arrays.stream(s).collect(Collectors.joining("|"));
+        }
         PaginationDTO<QuestionDTO> paginationDTO=new PaginationDTO<>();
-        Integer count= (int)questionMapper.countByExample(new QuestionExample());
+        Integer count= questionEXTMapper.countSearchQuestion(search);
         int offset = paginationDTO.initPage(count, page, size);
-        QuestionExample questionExample = new QuestionExample();
-        questionExample.setOrderByClause("id desc");
-        List<Question> questions=questionMapper.selectByExampleWithRowbounds(questionExample,new RowBounds(offset,paginationDTO.getSize()));
+        List<Question> questions=questionEXTMapper.getSearchQuestion(search,offset,paginationDTO.getSize());
         List<QuestionDTO> questionDTOs = getQuestionDTOS(questions);
         paginationDTO.setData(questionDTOs);
         return paginationDTO;
